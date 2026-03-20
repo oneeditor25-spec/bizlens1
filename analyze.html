@@ -3,352 +3,305 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Analyze a Product — BizLens</title>
-  <meta name="description" content="Enter any product or brand and get instant business strategy analysis. Revenue models, marketing channels, SWOT, competitive moat and more.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.bizlens.in/analyze">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.bizlens.in/analyze">
-  <meta property="og:title" content="Analyze a Product — BizLens">
-  <meta property="og:description" content="Business & marketing intelligence for any product or brand.">
+  <title>Analyze a Brand — BizLens</title>
+  <meta name="description" content="Real business data for any brand or company. Powered by Google & Wikipedia.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a08; --surface: #111110; --border: #1e1e1c;
+      --bg: #0a0a08; --surface: #111110; --border: #222220;
       --accent: #e8ff47; --accent2: #ff6b35; --accent3: #47b8ff;
       --text: #e8e6e0; --muted: #6b6960; --success: #4dff91;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: "DM Sans", sans-serif; min-height: 100vh; overflow-x: hidden; }
     body::before {
-      content: ''; position: fixed; inset: 0;
+      content: ""; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 1000; opacity: 0.4;
     }
     header {
       border-bottom: 1px solid var(--border); padding: 0 40px; height: 60px;
-      display: flex; align-items: center; gap: 20px; position: sticky; top: 0;
+      display: flex; align-items: center; gap: 16px; position: sticky; top: 0;
       background: rgba(10,10,8,0.95); backdrop-filter: blur(20px); z-index: 100;
     }
-    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--accent); text-decoration: none; }
-    .header-tag { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; }
-    .back-link { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 1px; margin-left: auto; transition: color 0.2s; }
+    .logo { font-family: "Bebas Neue", sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--accent); text-decoration: none; }
+    .header-tag { font-family: "DM Mono", monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--border); padding: 3px 8px; }
+    .back-link { font-family: "DM Mono", monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 1px; margin-left: auto; transition: color 0.2s; }
     .back-link:hover { color: var(--accent); }
-    .main { max-width: 1400px; margin: 0 auto; padding: 40px; }
-    .input-section { margin-bottom: 48px; }
-    .input-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; display: block; }
-    .input-row { display: flex; gap: 0; align-items: stretch; }
+    .main { max-width: 1100px; margin: 0 auto; padding: 40px; }
+    .input-label { font-family: "DM Mono", monospace; font-size: 11px; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: block; }
+    .input-row { display: flex; gap: 0; margin-bottom: 60px; }
     .product-input {
       flex: 1; background: var(--surface); border: 1px solid var(--border); border-right: none;
-      color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; padding: 16px 20px;
-      outline: none; transition: border-color 0.2s;
+      color: var(--text); font-family: "DM Sans", sans-serif; font-size: 16px; padding: 16px 20px; outline: none; transition: border-color 0.2s;
     }
     .product-input:focus { border-color: var(--accent); }
     .product-input::placeholder { color: var(--muted); }
     .analyze-btn {
       background: var(--accent); color: #0a0a08; border: none;
-      font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px;
+      font-family: "Bebas Neue", sans-serif; font-size: 18px; letter-spacing: 2px;
       padding: 0 36px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
     }
     .analyze-btn:hover { background: #fff; }
     .analyze-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+    /* LOADING */
     .loading { display: none; text-align: center; padding: 80px 0; }
     .loading.active { display: block; }
-    .loading-bar-wrap { width: 300px; margin: 24px auto; height: 2px; background: var(--border); overflow: hidden; }
+    .loading-bar-wrap { width: 300px; margin: 20px auto; height: 2px; background: var(--border); overflow: hidden; }
     .loading-bar { height: 100%; background: var(--accent); animation: loadbar 1.4s ease-in-out infinite; }
     @keyframes loadbar { 0%{width:0%;margin-left:0} 50%{width:60%;margin-left:20%} 100%{width:0%;margin-left:100%} }
-    .loading-text { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .loading-text { font-family: "DM Mono", monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
     .loading-steps { margin-top: 16px; }
-    .loading-step { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--border); letter-spacing: 1px; padding: 4px 0; transition: color 0.3s; }
+    .loading-step { font-family: "DM Mono", monospace; font-size: 11px; color: var(--border); letter-spacing: 1px; padding: 4px 0; transition: color 0.3s; }
     .loading-step.active { color: var(--accent); }
     .loading-step.done { color: var(--success); }
+
+    /* RESULTS */
     .results { display: none; }
-    .results.active { display: block; }
-    .error-box { background: rgba(255,107,53,0.08); border: 1px solid rgba(255,107,53,0.2); padding: 24px; color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 13px; }
-    .product-hero { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 20px; }
-    .product-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 100px); line-height: 0.9; color: var(--accent); letter-spacing: 2px; }
-    .product-tagline { font-size: 14px; color: var(--muted); font-style: italic; max-width: 400px; line-height: 1.6; margin-top: 8px; }
-    .score-badge { text-align: right; }
-    .score-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 1; }
-    .score-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .results.active { display: block; animation: fadeUp 0.4s ease both; }
 
-    /* FINANCIAL STRIP */
-    .financial-strip {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px;
+    /* NOT FOUND */
+    .not-found {
+      border: 1px solid var(--border); padding: 48px; text-align: center;
     }
-    .fin-card {
-      background: var(--surface); border: 1px solid var(--border); padding: 20px 24px;
-      position: relative; overflow: hidden;
-    }
-    .fin-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; }
-    .fin-card.networth::before { background: var(--accent); }
-    .fin-card.revenue::before { background: var(--success); }
-    .fin-card.growth::before { background: var(--accent3); }
-    .fin-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-    .fin-value { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; line-height: 1; }
-    .fin-card.networth .fin-value { color: var(--accent); }
-    .fin-card.revenue .fin-value { color: var(--success); }
-    .fin-card.growth .fin-value { color: var(--accent3); }
-    .fin-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .not-found h2 { font-family: "Bebas Neue", sans-serif; font-size: 48px; color: var(--accent2); margin-bottom: 16px; }
+    .not-found p { font-family: "DM Mono", monospace; font-size: 13px; color: var(--muted); line-height: 1.8; }
 
-    /* SUGGESTIONS */
-    .suggestions-bar {
-      background: rgba(232,255,71,0.04); border: 1px solid rgba(232,255,71,0.12);
-      padding: 16px 24px; margin-bottom: 2px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    }
-    .suggestions-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
-    .suggestion-chip {
-      font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
-      border: 1px solid rgba(232,255,71,0.25); padding: 5px 14px; cursor: pointer;
-      transition: all 0.2s; background: transparent; letter-spacing: 1px;
-    }
-    .suggestion-chip:hover { background: var(--accent); color: #0a0a08; }
+    /* BRAND HERO */
+    .brand-hero { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+    .brand-name { font-family: "Bebas Neue", sans-serif; font-size: clamp(48px, 8vw, 96px); line-height: 0.9; color: var(--accent); letter-spacing: 2px; margin-bottom: 12px; }
+    .brand-desc { font-size: 14px; color: #c8c6c0; line-height: 1.8; max-width: 800px; margin-bottom: 20px; }
+    .source-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 2px; text-transform: uppercase; }
+    .badge-green { background: rgba(77,255,145,0.1); color: var(--success); border: 1px solid rgba(77,255,145,0.2); }
+    .badge-blue { background: rgba(71,184,255,0.1); color: var(--accent3); border: 1px solid rgba(71,184,255,0.2); }
+    .badge-yellow { background: rgba(232,255,71,0.1); color: var(--accent); border: 1px solid rgba(232,255,71,0.2); }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px; }
-    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-bottom: 2px; }
-    .card { background: var(--surface); padding: 28px; border: 1px solid var(--border); position: relative; overflow: hidden; animation: fadeUp 0.5s ease both; }
-    .card-accent-line { position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
-    .card h3 { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
-    .card p, .card li { font-size: 14px; line-height: 1.7; color: #c8c6c0; }
-    .card ul { list-style: none; }
-    .card ul li { padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
-    .card ul li:last-child { border-bottom: none; }
-    .bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
-    .metric { margin-bottom: 18px; }
-    .metric-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-family: 'DM Mono', monospace; font-size: 11px; }
-    .metric-name { color: var(--text); } .metric-value { color: var(--accent); }
-    .metric-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-    .metric-fill { height: 100%; border-radius: 2px; transition: width 1s ease; width: 0; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-    .tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; padding: 4px 10px; border-radius: 2px; text-transform: uppercase; }
-    .tag-green { background: rgba(77,255,145,0.1); color: var(--success); border: 1px solid rgba(77,255,145,0.2); }
-    .tag-orange { background: rgba(255,107,53,0.1); color: var(--accent2); border: 1px solid rgba(255,107,53,0.2); }
-    .tag-blue { background: rgba(71,184,255,0.1); color: var(--accent3); border: 1px solid rgba(71,184,255,0.2); }
-    .tag-yellow { background: rgba(232,255,71,0.1); color: var(--accent); border: 1px solid rgba(232,255,71,0.2); }
-    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .swot-cell { padding: 20px; background: var(--surface); }
-    .swot-cell h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; margin-bottom: 12px; }
-    .swot-cell ul { list-style: none; }
-    .swot-cell li { font-size: 13px; color: #c8c6c0; padding: 5px 0; line-height: 1.5; border-bottom: 1px solid var(--border); }
-    .swot-cell li:last-child { border-bottom: none; }
-    .swot-s h4 { color: var(--success); } .swot-w h4 { color: var(--accent2); }
-    .swot-o h4 { color: var(--accent3); } .swot-t h4 { color: #ff4747; }
-    .insight-box { background: rgba(232,255,71,0.05); border: 1px solid rgba(232,255,71,0.15); padding: 20px 24px; margin-top: 16px; font-style: italic; font-size: 15px; line-height: 1.7; color: var(--accent); }
+    /* DATA GRID */
+    .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 2px; }
+    .data-card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+    .data-card-label { font-family: "DM Mono", monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+    .data-card-value { font-family: "Bebas Neue", sans-serif; font-size: 28px; color: var(--text); letter-spacing: 1px; line-height: 1.1; }
+    .data-card-value.accent { color: var(--accent); }
+    .data-card-value.blue { color: var(--accent3); }
+    .data-card-value.green { color: var(--success); }
+    .data-card-value.orange { color: var(--accent2); }
+    .data-card-value.small { font-size: 18px; }
+    .na { color: var(--muted); font-family: "DM Mono", monospace; font-size: 13px; }
+
+    /* FULL WIDTH CARD */
+    .full-card { background: var(--surface); border: 1px solid var(--border); padding: 28px; margin-bottom: 2px; }
+    .full-card h3 { font-family: "DM Mono", monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+    .full-card p { font-size: 14px; color: #c8c6c0; line-height: 1.8; }
+    .full-card a { color: var(--accent3); text-decoration: none; font-family: "DM Mono", monospace; font-size: 13px; }
+    .full-card a:hover { text-decoration: underline; }
+
+    /* LINKS ROW */
+    .links-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: "DM Mono", monospace; font-size: 11px; letter-spacing: 1px;
+      padding: 8px 16px; border: 1px solid var(--border); color: var(--muted);
+      text-decoration: none; transition: all 0.2s; text-transform: uppercase;
+    }
+    .ext-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* DATA SOURCE NOTE */
+    .source-note { font-family: "DM Mono", monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+    /* ERROR */
+    .error-box { background: rgba(255,107,53,0.08); border: 1px solid rgba(255,107,53,0.2); padding: 24px; color: var(--accent2); font-family: "DM Mono", monospace; font-size: 13px; }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 900px) { .grid-3, .financial-strip { grid-template-columns: 1fr 1fr; } .main { padding: 20px; } header { padding: 0 20px; } }
-    @media (max-width: 600px) { .grid-2, .grid-3, .financial-strip { grid-template-columns: 1fr; } .swot-grid { grid-template-columns: 1fr; } .input-row { flex-direction: column; } .analyze-btn { padding: 16px; } }
+
+    @media (max-width: 900px) { .data-grid { grid-template-columns: 1fr 1fr; } .main { padding: 20px; } header { padding: 0 20px; } }
+    @media (max-width: 600px) { .data-grid { grid-template-columns: 1fr; } .input-row { flex-direction: column; } .analyze-btn { padding: 16px; } }
   </style>
 </head>
 <body>
+
 <header>
   <a href="/" class="logo">BizLens</a>
-  <div class="header-tag">Product Intelligence</div>
+  <div class="header-tag">Real Data Only</div>
   <a href="/" class="back-link">← Home</a>
 </header>
+
 <div class="main">
-  <div class="input-section">
-    <span class="input-label">// Analyze Any Product</span>
-    <div class="input-row">
-      <input class="product-input" id="productInput" type="text" placeholder="Enter a product, brand, or company (e.g. Nike, Spotify, Red Bull...)">
-      <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">ANALYZE</button>
-    </div>
+  <span class="input-label">// Search Any Brand, Company or Product</span>
+  <div class="input-row">
+    <input class="product-input" id="productInput" type="text"
+      placeholder="e.g. Tata Motors, Zomato, Nike, Amul, Jio...">
+    <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">SEARCH</button>
   </div>
+
   <div class="loading" id="loading">
-    <div class="loading-text">Running Analysis</div>
+    <div class="loading-text">Fetching Real Data</div>
     <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
     <div class="loading-steps">
-      <div class="loading-step" id="step1">→ Fetching company data...</div>
-      <div class="loading-step" id="step2">→ Mapping revenue & financials...</div>
-      <div class="loading-step" id="step3">→ Scoring competitive moat...</div>
-      <div class="loading-step" id="step4">→ Building SWOT analysis...</div>
+      <div class="loading-step" id="step1">→ Searching Google Knowledge Graph...</div>
+      <div class="loading-step" id="step2">→ Pulling Wikipedia data...</div>
+      <div class="loading-step" id="step3">→ Fetching Wikidata (revenue, employees)...</div>
+      <div class="loading-step" id="step4">→ Building real profile...</div>
     </div>
   </div>
+
   <div class="results" id="results"></div>
 </div>
+
 <script>
-  const preloaded = sessionStorage.getItem('bizlens_product');
+  const preloaded = sessionStorage.getItem("bizlens_product");
   if (preloaded) {
-    document.getElementById('productInput').value = preloaded;
-    sessionStorage.removeItem('bizlens_product');
+    document.getElementById("productInput").value = preloaded;
+    sessionStorage.removeItem("bizlens_product");
     setTimeout(analyze, 300);
   }
 
-  function animateLoadingSteps() {
-    const steps = ['step1','step2','step3','step4'];
+  function animateSteps() {
+    const steps = ["step1","step2","step3","step4"];
     let i = 0;
-    const interval = setInterval(() => {
-      if (i > 0) document.getElementById(steps[i-1]).className = 'loading-step done';
-      if (i < steps.length) { document.getElementById(steps[i]).className = 'loading-step active'; i++; }
-      else clearInterval(interval);
-    }, 800);
-    return interval;
+    const iv = setInterval(() => {
+      if (i > 0) document.getElementById(steps[i-1]).className = "loading-step done";
+      if (i < steps.length) { document.getElementById(steps[i]).className = "loading-step active"; i++; }
+      else clearInterval(iv);
+    }, 700);
+    return iv;
   }
 
   async function analyze() {
-    const input = document.getElementById('productInput').value.trim();
+    const input = document.getElementById("productInput").value.trim();
     if (!input) return;
-    const btn = document.getElementById('analyzeBtn');
-    const loading = document.getElementById('loading');
-    const results = document.getElementById('results');
-    ['step1','step2','step3','step4'].forEach(id => { document.getElementById(id).className = 'loading-step'; });
+
+    const btn = document.getElementById("analyzeBtn");
+    const loading = document.getElementById("loading");
+    const results = document.getElementById("results");
+
+    ["step1","step2","step3","step4"].forEach(id => document.getElementById(id).className = "loading-step");
     btn.disabled = true;
-    loading.classList.add('active');
-    results.classList.remove('active');
-    results.innerHTML = '';
-    const stepInterval = animateLoadingSteps();
+    loading.classList.add("active");
+    results.classList.remove("active");
+    results.innerHTML = "";
+
+    const stepIv = animateSteps();
+
     try {
-      const res = await fetch('/api/analyze', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product: input })
       });
-      clearInterval(stepInterval);
-      if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Request failed'); }
+
+      clearInterval(stepIv);
       const d = await res.json();
-      renderResults(d);
-    } catch (err) {
-      results.innerHTML = `<div class="error-box">⚠ ${err.message || 'Something went wrong. Please try again.'}</div>`;
-      results.classList.add('active');
+
+      if (!d.found) {
+        results.innerHTML = `
+          <div class="not-found">
+            <h2>No Data Found</h2>
+            <p>${d.message}</p>
+            <p style="margin-top:16px">Try searching with the full official name.<br>
+            Small local brands may not have a Wikipedia or Google listing yet.</p>
+          </div>`;
+      } else {
+        renderResults(d);
+      }
+
+      results.classList.add("active");
+
+    } catch(err) {
+      clearInterval(stepIv);
+      results.innerHTML = `<div class="error-box">⚠ ${err.message || "Something went wrong. Please try again."}</div>`;
+      results.classList.add("active");
     }
+
     btn.disabled = false;
-    loading.classList.remove('active');
+    loading.classList.remove("active");
   }
 
-  function searchSuggestion(text) {
-    const brand = text.replace('Try searching: ', '').trim();
-    document.getElementById('productInput').value = brand;
-    analyze();
+  function val(v, cls="") {
+    if (!v) return `<span class="na">—</span>`;
+    return `<div class="data-card-value ${cls}">${v}</div>`;
   }
 
   function renderResults(d) {
-    const results = document.getElementById('results');
-    const scoreColor = d.businessScore >= 75 ? 'var(--success)' : d.businessScore >= 50 ? 'var(--accent)' : 'var(--accent2)';
-    const categoryColors = ['tag-yellow','tag-blue','tag-green','tag-orange'];
+    const results = document.getElementById("results");
 
-    const suggestionsHtml = d.suggestions && d.suggestions.length ? `
-      <div class="suggestions-bar">
-        <span class="suggestions-label">// Also Try</span>
-        ${d.suggestions.map(s => `<button class="suggestion-chip" onclick="searchSuggestion('${s}')">${s.replace('Try searching: ','')}</button>`).join('')}
-      </div>` : '';
+    const sourceBadges = [
+      d.sources?.googleKG ? `<span class="badge badge-yellow">✓ Google Knowledge Graph</span>` : "",
+      d.sources?.wikipedia ? `<span class="badge badge-blue">✓ Wikipedia</span>` : "",
+      d.sources?.wikidata ? `<span class="badge badge-green">✓ Wikidata</span>` : ""
+    ].filter(Boolean).join("");
+
+    const links = [
+      d.website ? `<a href="${d.website}" target="_blank" class="ext-link">🌐 Official Website</a>` : "",
+      d.wikiUrl ? `<a href="${d.wikiUrl}" target="_blank" class="ext-link">📖 Wikipedia</a>` : "",
+      d.wikidataUrl ? `<a href="${d.wikidataUrl}" target="_blank" class="ext-link">🔗 Wikidata</a>` : ""
+    ].filter(Boolean).join("");
 
     results.innerHTML = `
-      <div class="product-hero">
-        <div>
-          <div class="product-name">${d.name}</div>
-          <div class="product-tagline">${d.tagline}</div>
-          <div class="tags" style="margin-top:16px">
-            ${(d.categoryTags||[]).map((t,i)=>`<span class="tag ${categoryColors[i%4]}">${t}</span>`).join('')}
-            ${(d.marketTags||[]).map(t=>`<span class="tag tag-orange">${t}</span>`).join('')}
-          </div>
+      <div class="brand-hero">
+        <div class="brand-name">${d.name}</div>
+        <div class="brand-desc">${d.description}</div>
+        <div class="source-badges">${sourceBadges}</div>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-card-label">Industry</div>
+          ${val(d.industry, "small")}
         </div>
-        <div class="score-badge">
-          <div class="score-num" style="color:${scoreColor}">${d.businessScore}</div>
-          <div class="score-label">Business Strength Score</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:6px;max-width:180px;text-align:right">${d.scoreReason}</div>
+        <div class="data-card">
+          <div class="data-card-label">Country</div>
+          ${val(d.country, "small")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Founded</div>
+          ${val(d.founded, "accent")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Annual Revenue</div>
+          ${val(d.revenue, "green")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Employees</div>
+          ${val(d.employees, "blue")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Stock Symbol</div>
+          ${val(d.stockSymbol, "orange")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Headquarters</div>
+          ${val(d.headquarters, "small")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">CEO / Leader</div>
+          ${val(d.ceo, "small")}
+        </div>
+        <div class="data-card">
+          <div class="data-card-label">Founder</div>
+          ${val(d.founder, "small")}
         </div>
       </div>
 
-      <div class="financial-strip">
-        <div class="fin-card networth">
-          <div class="fin-label">// Company Net Worth</div>
-          <div class="fin-value">${d.netWorth || 'N/A'}</div>
-          <div class="fin-sub">Market Capitalization</div>
-        </div>
-        <div class="fin-card revenue">
-          <div class="fin-label">// Annual Revenue</div>
-          <div class="fin-value" style="font-size:26px">${d.revenue || 'N/A'}</div>
-          <div class="fin-sub">Total Revenue</div>
-        </div>
-        <div class="fin-card growth">
-          <div class="fin-label">// Revenue Growth</div>
-          <div class="fin-value">${d.revenueGrowth || 'N/A'}</div>
-          <div class="fin-sub">Year over Year</div>
-        </div>
-      </div>
+      ${links ? `
+      <div class="full-card">
+        <h3>Official Links</h3>
+        <div class="links-row">${links}</div>
+      </div>` : ""}
 
-      ${suggestionsHtml}
-
-      <div class="grid-3">
-        <div class="card" style="animation-delay:0.05s">
-          <div class="card-accent-line" style="background:var(--accent)"></div>
-          <h3>Business Model</h3>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--accent);margin-bottom:12px">${d.businessModel.type}</div>
-          <ul>${d.businessModel.revenueStreams.map(s=>`<li><div class="bullet"></div><span>${s}</span></li>`).join('')}</ul>
-          <p style="margin-top:14px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px">${d.businessModel.unitEconomics}</p>
-        </div>
-        <div class="card" style="animation-delay:0.1s">
-          <div class="card-accent-line" style="background:var(--accent3)"></div>
-          <h3>Competitive Moat</h3>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--accent3);margin-bottom:12px">${d.moat.type}</div>
-          <p style="font-size:13px;line-height:1.6;margin-bottom:16px">${d.moat.description}</p>
-          <div class="metric">
-            <div class="metric-header"><span class="metric-name">Moat Strength</span><span class="metric-value" style="color:var(--accent3)">${d.moat.strength}%</span></div>
-            <div class="metric-bar"><div class="metric-fill" data-width="${d.moat.strength}" style="background:var(--accent3)"></div></div>
-          </div>
-        </div>
-        <div class="card" style="animation-delay:0.15s">
-          <div class="card-accent-line" style="background:var(--accent2)"></div>
-          <h3>Pricing Strategy</h3>
-          <p style="font-size:14px;line-height:1.7;margin-bottom:16px">${d.pricingStrategy}</p>
-          <h3 style="margin-top:16px">Growth Strategy</h3>
-          <ul>${d.growthStrategy.map(s=>`<li><div class="bullet" style="background:var(--accent2)"></div><span>${s}</span></li>`).join('')}</ul>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card" style="animation-delay:0.2s">
-          <div class="card-accent-line" style="background:var(--success)"></div>
-          <h3>Marketing Intelligence</h3>
-          <p style="margin-bottom:12px;font-size:13px;color:var(--muted)">Positioning: <span style="color:var(--text)">${d.marketing.positioning}</span></p>
-          <p style="margin-bottom:12px;font-size:13px;color:var(--muted)">Target: <span style="color:var(--text)">${d.marketing.targetAudience}</span></p>
-          <p style="margin-bottom:16px;font-size:13px;font-style:italic;color:var(--accent)">"${d.marketing.keyMessage}"</p>
-          <h3>Channels</h3>
-          <div class="tags">${d.marketing.primaryChannels.map(c=>`<span class="tag tag-green">${c}</span>`).join('')}</div>
-          <h3 style="margin-top:16px">Key Tactics</h3>
-          <ul>${d.marketing.tactics.map(t=>`<li><div class="bullet" style="background:var(--success)"></div><span>${t}</span></li>`).join('')}</ul>
-        </div>
-        <div class="card" style="animation-delay:0.25s">
-          <div class="card-accent-line" style="background:var(--accent)"></div>
-          <h3>Business Metrics</h3>
-          ${d.metrics.map(m=>`
-            <div class="metric">
-              <div class="metric-header"><span class="metric-name">${m.name}</span><span class="metric-value">${m.value}%</span></div>
-              <div class="metric-bar"><div class="metric-fill" data-width="${m.value}" style="background:linear-gradient(90deg,var(--accent),var(--success))"></div></div>
-            </div>
-          `).join('')}
-          <h3 style="margin-top:20px">Competitive Edge</h3>
-          <p style="font-size:13px;line-height:1.7">${d.competitiveAdvantage}</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-bottom:2px;animation-delay:0.3s">
-        <div class="card-accent-line" style="background:#ff4747"></div>
-        <h3>SWOT Analysis — ${d.name}</h3>
-        <div class="swot-grid">
-          <div class="swot-cell swot-s"><h4>Strengths</h4><ul>${d.swot.strengths.map(s=>`<li>→ ${s}</li>`).join('')}</ul></div>
-          <div class="swot-cell swot-w"><h4>Weaknesses</h4><ul>${d.swot.weaknesses.map(s=>`<li>→ ${s}</li>`).join('')}</ul></div>
-          <div class="swot-cell swot-o"><h4>Opportunities</h4><ul>${d.swot.opportunities.map(s=>`<li>→ ${s}</li>`).join('')}</ul></div>
-          <div class="swot-cell swot-t"><h4>Threats</h4><ul>${d.swot.threats.map(s=>`<li>→ ${s}</li>`).join('')}</ul></div>
-        </div>
-      </div>
-
-      <div class="card" style="animation-delay:0.35s">
-        <div class="card-accent-line" style="background:var(--accent)"></div>
-        <h3>🔍 Key Strategic Insight</h3>
-        <div class="insight-box">${d.keyInsight}</div>
+      <div class="source-note">
+        ⚡ All data sourced in real-time from Google Knowledge Graph, Wikipedia & Wikidata.
+        No AI-generated or fake data. If a field shows — it means no public data exists for it.
       </div>
     `;
-
-    results.classList.add('active');
-    setTimeout(() => {
-      document.querySelectorAll('.metric-fill').forEach(el => { el.style.width = el.dataset.width + '%'; });
-    }, 100);
-    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  document.getElementById('productInput').addEventListener('keydown', e => { if (e.key === 'Enter') analyze(); });
+  document.getElementById("productInput").addEventListener("keydown", e => {
+    if (e.key === "Enter") analyze();
+  });
 </script>
 </body>
 </html>
