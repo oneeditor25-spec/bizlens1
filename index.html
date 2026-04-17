@@ -25,34 +25,38 @@
   {"@context":"https://schema.org","@type":"WebApplication","name":"BizLens","description":"Business and marketing intelligence tool. Analyze any product or brand instantly.","url":"https://www.bizlens.in","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
   <style>
-    :root{--bg:#0a0a08;--surface:#111110;--border:#1e1e1c;--accent:#e8ff47;--accent2:#ff6b35;--accent3:#47b8ff;--text:#e8e6e0;--muted:#5a5850;--success:#4dff91}
+    :root{
+      --bg:#0a0a08;--surface:#111110;--border:#1e1e1c;
+      --accent:#e8ff47;--accent2:#ff6b35;--accent3:#47b8ff;
+      --text:#e8e6e0;--muted:#5a5850;--success:#4dff91;
+    }
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
     body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border);background:rgba(10,10,8,.92);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border);background:rgba(10,10,8,.95);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px}
     .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:4px;color:var(--accent);text-decoration:none}
-    .nav-links{display:flex;gap:24px;align-items:center}
+    .nav-links{display:flex;gap:28px;align-items:center}
     .nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
     .nav-links a:hover{color:var(--text)}
     .nav-cta{background:var(--accent)!important;color:#0a0a08!important;padding:8px 20px!important;font-weight:600!important}
     .nav-cta:hover{background:#fff!important}
 
     /* HAMBURGER */
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:200}
     .hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all .3s}
     .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
     /* MOBILE MENU */
-    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,8,.98);border-bottom:1px solid var(--border);z-index:99;padding:24px;flex-direction:column;gap:20px;transform:translateY(-10px);opacity:0;transition:all .3s}
-    .mobile-menu.open{display:flex;transform:translateY(0);opacity:1}
-    .mobile-menu a{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border)}
-    .mobile-menu a:hover{color:var(--accent)}
-    .mobile-menu .mob-cta{background:var(--accent);color:#0a0a08;padding:14px 20px;text-align:center;font-weight:600;border:none}
+    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,8,.98);border-bottom:1px solid var(--border);z-index:99;flex-direction:column;padding:16px 0}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:14px 24px;border-bottom:1px solid var(--border);transition:color .2s}
+    .mobile-menu a:hover{color:var(--text)}
+    .mobile-cta{background:var(--accent)!important;color:#0a0a08!important;font-weight:700!important;text-align:center;margin:12px 24px;padding:14px!important;border:none!important}
 
     /* HERO */
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}
@@ -100,51 +104,104 @@
     .step-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--accent);margin-bottom:10px}
     .step-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
-    /* STRATEGY LENS */
-    #strategy{background:var(--surface);padding:80px 0}
-    .strategy-inner{max-width:1200px;margin:0 auto;padding:0 48px}
-    .strategy-input-row{display:flex;gap:0;max-width:640px;margin-bottom:40px}
-    .strategy-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:14px 18px;outline:none;transition:border-color .2s}
-    .strategy-input:focus{border-color:var(--accent)}
-    .strategy-input::placeholder{color:var(--muted)}
-    .strategy-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:0 28px;cursor:pointer;transition:background .2s}
-    .strategy-btn:hover{background:#fff}
-    .strategy-result{display:none;opacity:0;transform:translateY(16px);transition:all .4s ease}
-    .strategy-result.show{display:block;opacity:1;transform:translateY(0)}
-    .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
-    .s-card{background:var(--bg);border:1px solid var(--border);padding:24px 28px}
-    .s-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--accent);margin-bottom:14px}
-    .s-card ul{list-style:none}
-    .s-card li{font-size:13px;color:#c8c6c0;padding:6px 0;border-bottom:1px solid var(--border);line-height:1.5}
-    .s-card li:last-child{border-bottom:none}
-    .s-card li::before{content:'→ ';color:var(--accent);font-family:'DM Mono',monospace}
-    .score-bar-wrap{background:var(--bg);border:1px solid var(--border);padding:24px 28px;margin-bottom:2px}
-    .score-bar-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-    .score-bar-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:8px}
-    .score-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));border-radius:2px;transition:width 1s ease;width:0}
-    .score-bar-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--accent)}
-    .graveyard-ref{background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);padding:16px 20px;font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:2px}
-    .graveyard-ref strong{display:block;color:var(--accent2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;margin-bottom:6px}
-    .strategy-email-row{display:flex;gap:0;max-width:480px;margin-top:20px}
-    .strategy-email-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;outline:none}
-    .strategy-email-input:focus{border-color:var(--accent)}
-    .strategy-email-input::placeholder{color:var(--muted)}
-    .strategy-email-btn{background:var(--surface);color:var(--accent);border:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:0 20px;cursor:pointer;transition:all .2s;white-space:nowrap}
-    .strategy-email-btn:hover{background:var(--accent);color:#0a0a08}
-    .strategy-email-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px}
+    /* ===== STRATEGY LENS — DISTINCT ORANGE THEME ===== */
+    #strategy{
+      background: linear-gradient(180deg, #0f0a07 0%, #130d08 100%);
+      border-top: 2px solid var(--accent2);
+      border-bottom: 2px solid var(--accent2);
+      padding: 100px 0;
+    }
+    #strategy .section{padding-top:0;padding-bottom:0}
+    #strategy .section-label{color:var(--accent2)}
+    #strategy .section-title{color:var(--text)}
+    #strategy .section-title span{color:var(--accent2)}
 
-    /* EMAIL SUBSCRIBE */
-    #subscribe{padding:80px 0;border-top:1px solid var(--border)}
-    .subscribe-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
-    .subscribe-text h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);line-height:.9;margin-bottom:12px}
-    .subscribe-text p{font-size:14px;color:var(--muted);line-height:1.6;max-width:360px}
-    .subscribe-form{display:flex;gap:0;flex:1;max-width:440px}
-    .subscribe-input{flex:1;background:var(--surface);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color .2s}
-    .subscribe-input:focus{border-color:var(--accent)}
+    .strategy-wrap{
+      background: rgba(255,107,53,0.05);
+      border: 1px solid rgba(255,107,53,0.25);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .strategy-wrap::before{
+      content:'STRATEGY LENS';
+      position:absolute;top:20px;right:24px;
+      font-family:'Bebas Neue',sans-serif;font-size:80px;
+      color:rgba(255,107,53,0.05);letter-spacing:4px;pointer-events:none;line-height:1;
+    }
+    .strategy-input-row{display:flex;gap:0;margin-bottom:12px}
+    .strategy-input{
+      flex:1;background:#0a0a08;
+      border:1px solid rgba(255,107,53,0.4);border-right:none;
+      color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;
+      padding:16px 20px;outline:none;transition:border-color .2s;
+    }
+    .strategy-input:focus{border-color:var(--accent2)}
+    .strategy-input::placeholder{color:var(--muted)}
+    .strategy-btn{
+      background:var(--accent2);color:#fff;border:none;
+      font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;
+      padding:0 36px;cursor:pointer;transition:all .2s;white-space:nowrap;
+    }
+    .strategy-btn:hover{background:#ff8c5a}
+    .strategy-hint{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,107,53,0.5);letter-spacing:1px}
+
+    .strategy-result{
+      display:none;margin-top:32px;
+      border-top:1px solid rgba(255,107,53,0.2);padding-top:32px;
+    }
+    .strategy-result.active{display:block}
+    .strategy-score-row{display:flex;align-items:center;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+    .strategy-score-num{
+      font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;color:var(--accent2);
+    }
+    .strategy-score-info{}
+    .strategy-score-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,107,53,0.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+    .strategy-score-verdict{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--text);letter-spacing:1px}
+    .strategy-score-sub{font-size:13px;color:var(--muted);margin-top:4px;max-width:320px;line-height:1.5}
+
+    .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
+    .strategy-card{background:rgba(255,107,53,0.04);border:1px solid rgba(255,107,53,0.15);padding:24px}
+    .strategy-card h4{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,107,53,0.7);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+    .strategy-card p,.strategy-card li{font-size:13px;color:#c8c6c0;line-height:1.7}
+    .strategy-card ul{list-style:none}
+    .strategy-card ul li{padding:5px 0;border-bottom:1px solid rgba(255,107,53,0.08);display:flex;gap:8px;align-items:flex-start}
+    .strategy-card ul li:last-child{border-bottom:none}
+    .s-bullet{width:5px;height:5px;border-radius:50%;background:var(--accent2);margin-top:7px;flex-shrink:0}
+
+    .risk-item{padding:10px 14px;margin-bottom:6px;border-left:3px solid var(--accent2);background:rgba(255,107,53,0.06);font-size:13px;color:#c8c6c0;line-height:1.6}
+    .risk-item:last-child{margin-bottom:0}
+
+    .strategy-email-row{
+      margin-top:24px;display:flex;gap:0;
+      border:1px solid rgba(255,107,53,0.25);
+    }
+    .strategy-email-input{
+      flex:1;background:#0a0a08;border:none;
+      color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;
+      padding:14px 18px;outline:none;
+    }
+    .strategy-email-input::placeholder{color:var(--muted)}
+    .strategy-email-btn{
+      background:var(--accent2);color:#fff;border:none;
+      font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+      padding:0 24px;cursor:pointer;transition:background .2s;white-space:nowrap;
+    }
+    .strategy-email-btn:hover{background:#ff8c5a}
+    .strategy-email-success{display:none;font-family:'DM Mono',monospace;font-size:11px;color:var(--success);letter-spacing:1px;margin-top:10px}
+
+    /* SUBSCRIBE */
+    .subscribe-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 48px;text-align:center}
+    .subscribe-section .section-label{color:var(--accent3)}
+    .subscribe-section h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);line-height:.95;margin-bottom:16px}
+    .subscribe-section p{font-size:14px;color:var(--muted);margin-bottom:32px}
+    .subscribe-form{display:flex;gap:0;max-width:480px;margin:0 auto}
+    .subscribe-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color .2s}
+    .subscribe-input:focus{border-color:var(--accent3)}
     .subscribe-input::placeholder{color:var(--muted)}
-    .subscribe-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:0 24px;cursor:pointer;transition:background .2s;white-space:nowrap}
+    .subscribe-btn{background:var(--accent3);color:#0a0a08;border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:0 24px;cursor:pointer;transition:background .2s;white-space:nowrap}
     .subscribe-btn:hover{background:#fff}
-    .subscribe-success{display:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--success);margin-top:10px;letter-spacing:1px}
+    .subscribe-success{display:none;font-family:'DM Mono',monospace;font-size:11px;color:var(--success);letter-spacing:1px;margin-top:12px}
 
     /* CTA */
     .cta-section{background:var(--accent);padding:80px 48px;text-align:center}
@@ -153,7 +210,6 @@
     .cta-btn{display:inline-block;background:#0a0a08;color:var(--accent);font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;padding:16px 48px;text-decoration:none;transition:all .2s}
     .cta-btn:hover{background:#fff;color:#0a0a08}
 
-    /* FOOTER */
     footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
     .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent)}
     .footer-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
@@ -167,9 +223,10 @@
       .section{padding:60px 20px}
       footer{padding:24px 20px}
       .cta-section{padding:60px 24px}
-      .strategy-inner{padding:0 20px}
-      .subscribe-inner{padding:0 20px}
+      #strategy{padding:60px 0}
+      .strategy-wrap{padding:24px}
       .strategy-grid{grid-template-columns:1fr}
+      .subscribe-section{padding:60px 24px}
     }
     @media(max-width:600px){
       .features-grid,.steps{grid-template-columns:1fr}
@@ -179,19 +236,19 @@
       .hero-input{border-right:1px solid rgba(232,255,71,.3)}
       .hero-btn{padding:16px}
       .strategy-input-row{flex-direction:column}
-      .strategy-input{border-right:1px solid var(--border)}
-      .strategy-btn{padding:14px}
+      .strategy-input{border-right:1px solid rgba(255,107,53,0.4)}
+      .strategy-btn{padding:16px}
       .subscribe-form{flex-direction:column}
       .subscribe-input{border-right:1px solid var(--border)}
       .subscribe-btn{padding:14px}
-      .subscribe-inner{flex-direction:column}
+      .strategy-score-num{font-size:60px}
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">BizLens</a>
+  <a href="index.html" class="nav-logo">BizLens</a>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#how">How It Works</a>
@@ -199,7 +256,7 @@
     <a href="graveyard.html">☠ Graveyard</a>
     <a href="analyze.html" class="nav-cta">Try It Free →</a>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -209,9 +266,10 @@
   <a href="#how" onclick="closeMobileMenu()">How It Works</a>
   <a href="#strategy" onclick="closeMobileMenu()">Strategy Lens</a>
   <a href="graveyard.html" onclick="closeMobileMenu()">☠ Graveyard</a>
-  <a href="analyze.html" class="mob-cta">Try It Free →</a>
+  <a href="analyze.html" class="mobile-cta" onclick="closeMobileMenu()">Try It Free →</a>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-content">
@@ -226,6 +284,7 @@
   </div>
 </section>
 
+<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
     <div class="ticker-item"><span>→</span> Nike</div><div class="ticker-item"><span>→</span> Spotify</div><div class="ticker-item"><span>→</span> Red Bull</div><div class="ticker-item"><span>→</span> Apple</div><div class="ticker-item"><span>→</span> Tesla</div><div class="ticker-item"><span>→</span> Airbnb</div><div class="ticker-item"><span>→</span> Duolingo</div><div class="ticker-item"><span>→</span> McDonald's</div><div class="ticker-item"><span>→</span> Notion</div><div class="ticker-item"><span>→</span> Zara</div>
@@ -233,6 +292,7 @@
   </div>
 </div>
 
+<!-- FEATURES -->
 <section class="section" id="features">
   <div class="section-label">// What You Get</div>
   <div class="section-title">Every Angle.<br>Every Strategy.</div>
@@ -246,6 +306,7 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section style="background:var(--surface);padding:80px 0" id="how">
   <div class="section" style="padding-top:0;padding-bottom:0">
     <div class="section-label">// How It Works</div>
@@ -258,70 +319,79 @@
   </div>
 </section>
 
-<!-- STRATEGY LENS SECTION -->
+<!-- ===== STRATEGY LENS — ORANGE SECTION ===== -->
 <section id="strategy">
-  <div class="strategy-inner">
-    <div class="section-label">// AI Strategy Analyzer</div>
-    <div class="section-title">Strategy<br>Lens</div>
-    <p style="font-size:15px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:36px">Describe your startup idea and get an instant strategy breakdown — target market, competitive moat, failure risks, and go-to-market plan.</p>
-    <div class="strategy-input-row">
-      <input class="strategy-input" id="strategyInput" type="text" placeholder="e.g. A marketplace for freelance designers...">
-      <button class="strategy-btn" onclick="runStrategyLens()">ANALYZE →</button>
-    </div>
-    <div class="strategy-result" id="strategyResult">
-      <div class="strategy-grid">
-        <div class="s-card">
-          <div class="s-card-title" id="s-market-title">Target Market</div>
-          <ul id="s-market-list"></ul>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title" id="s-moat-title">Build Your Moat</div>
-          <ul id="s-moat-list"></ul>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title" id="s-risks-title">Watch Out For</div>
-          <ul id="s-risks-list"></ul>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title" id="s-gtm-title">Launch Strategy</div>
-          <ul id="s-gtm-list"></ul>
-        </div>
+  <div class="section">
+    <div class="section-label">// Strategy Lens</div>
+    <div class="section-title">Validate Your<br><span style="color:var(--accent2)">Startup Idea.</span></div>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:40px;max-width:560px;line-height:1.7">Enter your startup idea and get an instant strategy breakdown — target market, competitive moat, failure risks, go-to-market, and a viability score.</p>
+
+    <div class="strategy-wrap">
+      <div class="strategy-input-row">
+        <input class="strategy-input" id="strategyInput" type="text" placeholder="e.g. An app that connects freelance chefs with home dinner parties...">
+        <button class="strategy-btn" onclick="runStrategyLens()">ANALYZE →</button>
       </div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-label">// Viability Score</div>
-        <div class="score-bar-num" id="scoreNum">—</div>
-        <div class="score-bar-track"><div class="score-bar-fill" id="scoreFill"></div></div>
-      </div>
-      <div class="graveyard-ref" id="s-graveyard-ref"></div>
-      <div style="margin-top:20px">
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:10px">// GET FULL REPORT VIA EMAIL</div>
+      <div class="strategy-hint">// Describe your startup idea in one sentence</div>
+
+      <div class="strategy-result" id="strategyResult">
+        <div class="strategy-score-row">
+          <div class="strategy-score-num" id="sScore">72</div>
+          <div class="strategy-score-info">
+            <div class="strategy-score-label">// Viability Score</div>
+            <div class="strategy-score-verdict" id="sVerdict">MODERATE POTENTIAL</div>
+            <div class="strategy-score-sub" id="sScoreSub">Strong concept with execution risks. Focus on distribution early.</div>
+          </div>
+        </div>
+
+        <div class="strategy-grid">
+          <div class="strategy-card">
+            <h4>🎯 Target Market</h4>
+            <p id="sMarket"></p>
+          </div>
+          <div class="strategy-card">
+            <h4>🏰 Competitive Moat</h4>
+            <p id="sMoat"></p>
+          </div>
+          <div class="strategy-card">
+            <h4>🚀 Go-to-Market</h4>
+            <ul id="sGTM"></ul>
+          </div>
+          <div class="strategy-card">
+            <h4>⚠️ Top Failure Risks</h4>
+            <div id="sRisks"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:2px">
+          <div class="strategy-card" style="background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.3)">
+            <h4>💡 Key Strategic Insight</h4>
+            <p id="sInsight" style="font-style:italic;color:var(--accent2)"></p>
+          </div>
+        </div>
+
         <div class="strategy-email-row">
-          <input class="strategy-email-input" id="strategyEmail" type="email" placeholder="your@email.com">
-          <button class="strategy-email-btn" onclick="sendStrategyReport()">SEND REPORT</button>
+          <input class="strategy-email-input" id="strategyEmail" type="email" placeholder="Get full report via email...">
+          <button class="strategy-email-btn" onclick="sendStrategyReport()">SEND REPORT →</button>
         </div>
-        <div class="strategy-email-note" id="strategyEmailNote"></div>
+        <div class="strategy-email-success" id="strategyEmailSuccess">✓ Report sent! Check your inbox.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EMAIL SUBSCRIBE SECTION -->
-<section id="subscribe">
-  <div class="subscribe-inner">
-    <div class="subscribe-text">
-      <h2>Daily Business<br><span style="color:var(--accent)">Insights</span></h2>
-      <p>Get daily startup strategies, market breakdowns, and business intelligence delivered to your inbox.</p>
-    </div>
-    <div>
-      <form class="subscribe-form" onsubmit="handleSubscribe(event)" action="https://formspree.io/f/mpqkddlz" method="POST">
-        <input class="subscribe-input" id="subscribeEmail" name="email" type="email" placeholder="Enter your email...">
-        <button class="subscribe-btn" type="submit">SUBSCRIBE</button>
-      </form>
-      <div class="subscribe-success" id="subscribeSuccess">✓ You're in! First insight lands tomorrow.</div>
-    </div>
-  </div>
-</section>
+<!-- SUBSCRIBE -->
+<div class="subscribe-section">
+  <div class="section-label" style="text-align:center">// Daily Insights</div>
+  <h2>Stay Ahead of<br>the Market</h2>
+  <p>Get daily business strategy breakdowns, startup lessons, and market intelligence — straight to your inbox.</p>
+  <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+    <input class="subscribe-input" id="subscribeEmail" type="email" placeholder="your@email.com" required>
+    <button class="subscribe-btn" type="submit">Subscribe →</button>
+  </form>
+  <div class="subscribe-success" id="subscribeSuccess">✓ You're in! First insight lands tomorrow.</div>
+</div>
 
+<!-- CTA -->
 <section class="cta-section">
   <h2>Start Seeing<br>Like a Strategist</h2>
   <p>Free. Instant. No signup needed.</p>
@@ -335,73 +405,77 @@
 </footer>
 
 <script>
-const STRATEGY_DB = {
-  marketplace:{market:["Buyers with a recurring need","Sellers who are underserved by existing platforms","Power users who bridge both sides"],moat:["Liquidity network effects","Supplier lock-in through tools & data","Trust & review systems"],risks:["Cold start problem — chicken & egg","Race to the bottom on fees","Disintermediation once trust is built"],gtm:["Seed supply side first with guaranteed income","Launch in one city or niche before expanding","Use content marketing to attract organic demand"],score:72,ref:"Homejoy ($38M raised) failed because customers bypassed the platform after first booking. Build lock-in from day one."},
-  saas:{market:["SMBs spending 10+ hours/week on the problem","Teams of 5–50 with budget but no IT dept","Power users who will champion internally"],moat:["Data lock-in & switching costs","Workflow integrations","Product-led growth flywheel"],risks:["Feature parity with incumbents","Long enterprise sales cycles","Churn if onboarding is poor"],gtm:["Free tier to drive PLG adoption","Target one vertical deeply before going horizontal","Build integrations with tools your users already use"],score:78,ref:"Many SaaS startups die from building features nobody asked for. Talk to 50 customers before writing a line of code."},
-  subscription:{market:["Enthusiasts who over-index on the category","Gift buyers looking for curated experiences","Convenience-seekers with disposable income"],moat:["Curation expertise & brand","Supplier relationships & exclusives","Community & identity"],risks:["High churn after initial excitement","Unit economics break at scale","Subscription fatigue"],gtm:["Launch with a waitlist to create scarcity","Partner with influencers in the niche","Nail the unboxing experience for social sharing"],score:61,ref:"Birchbox pioneered beauty boxes but lost to copycats. Defensibility requires more than curation — build community."},
-  foodtech:{market:["Urban millennials with disposable income","Health-conscious consumers","Time-poor professionals"],moat:["Proprietary recipes or sourcing","Delivery logistics network","Brand & lifestyle identity"],risks:["Razor-thin margins on delivery","Regulatory complexity","Customer acquisition costs vs LTV"],gtm:["Start with a ghost kitchen to test demand","Partner with existing delivery platforms first","Build a cult brand before scaling ops"],score:58,ref:"Sprig ($56.7M) and Munchery ($125M) both burned cash on logistics. Prove unit economics before scaling delivery."},
-  social:{market:["Creators looking for better monetization","Niche communities underserved by big platforms","Gen Z users seeking authenticity"],moat:["Network effects (hardest to build, hardest to break)","Creator lock-in through earnings","Unique content format"],risks:["Cold start — empty network is worthless","Platform dependency for distribution","Monetization vs user experience tension"],gtm:["Seed with 100 high-quality creators before launch","Use invite-only to create exclusivity","Build tools creators love before building audience features"],score:65,ref:"Path ($40M) had great design but no network. Clubhouse peaked fast and faded. Timing and retention are everything."},
-  hardware:{market:["Early adopters willing to pay premium","Enthusiasts who will evangelize","Enterprise buyers with clear ROI"],moat:["Manufacturing relationships & IP","Software ecosystem around hardware","Brand premium (Apple effect)"],risks:["Capital intensity & long lead times","Supply chain fragility","Software commoditizes hardware value"],gtm:["Crowdfund to validate demand and fund production","Build software experience before hardware ships","Target one use case obsessively"],score:52,ref:"Jawbone ($900M) and Pebble ($26M) were crushed by Apple. Hardware is brutally capital intensive."},
-  fintech:{market:["Underbanked consumers","SMB finance teams","Crypto-native users"],moat:["Regulatory licenses","Trust & security reputation","Data network effects"],risks:["Regulatory compliance costs","Fraud & security breaches","Incumbent bank partnerships"],gtm:["Target one underserved segment","Get regulatory clarity early","Build trust through transparency"],score:66,ref:"Many FinTechs die from regulatory risk. Compliance is a moat, not a burden — build it early."},
-  default:{market:["Early adopters in target vertical","SMBs with the core pain point","Power users who evangelize"],moat:["Proprietary data or process","Strong brand in niche","Network effects or switching costs"],risks:["No clear differentiation from incumbents","Premature scaling before product-market fit","Running out of runway before traction"],gtm:["Find 10 customers who love you, not 1000 who like you","Build in public to attract early community","Focus on one channel until it saturates"],score:55,ref:"Most startups fail from premature scaling (WeWork), wrong market timing (Quibi), or solving problems nobody has (Juicero)."}
-};
+// ---- STRATEGY LENS ----
+const PATTERNS = [
+  {k:['food','chef','cook','meal','restaurant','delivery'],moat:'Local network effects + trust',market:'Urban professionals 25–40 who value experience dining',gtm:['Partner with 10 local chefs first','Instagram food content strategy','Referral program for hosts'],risks:['Chef supply is hard to scale','Liability & food safety regulations','Low repeat purchase rate'],insight:'Your real product is the story, not the food. Market the experience, not the service.',score:68},
+  {k:['app','platform','marketplace','connect'],moat:'Two-sided network effects',market:'Early adopters in target vertical, then mainstream',gtm:['Focus on supply side first','Niche community partnerships','Content marketing for SEO'],risks:['Cold start problem on both sides','High CAC before network effects kick in','Commoditization risk'],insight:'Marketplaces die from oversupply. Curate ruthlessly — quality beats quantity at launch.',score:71},
+  {k:['saas','software','tool','dashboard','analytics'],moat:'Switching costs + data lock-in',market:'SMBs or enterprise teams with a specific workflow pain',gtm:['Product-led growth with free tier','Direct outreach to target job titles','Integration partnerships'],risks:['Long sales cycles for enterprise','Feature parity with incumbents','Churn if onboarding is weak'],insight:'The first 90 days determine lifetime value. Invest in onboarding before acquisition.',score:76},
+  {k:['ai','machine learning','automation','gpt','llm'],moat:'Proprietary data + model fine-tuning',market:'Tech-forward businesses looking to cut operational costs',gtm:['Build in public on Twitter/LinkedIn','Free tool → paid upgrade funnel','Developer community first'],risks:['OpenAI/Google can replicate features fast','Trust & accuracy concerns','Regulatory uncertainty'],insight:'AI features are table stakes in 2025. Your moat is the workflow you wrap around the model.',score:65},
+  {k:['health','fitness','wellness','mental','therapy'],moat:'Habit formation + personalization data',market:'Health-conscious millennials and Gen Z, 22–38',gtm:['Influencer partnerships in wellness space','App store optimization','Corporate wellness B2B channel'],risks:['Behavior change is hard to sustain','Regulatory compliance (HIPAA etc.)','High competition from funded players'],insight:'Retention is your only metric. A health app used once is worthless — design for daily ritual.',score:70},
+  {k:['ecommerce','shop','sell','product','brand'],moat:'Brand identity + community',market:'Niche enthusiasts willing to pay premium for identity alignment',gtm:['Organic social content first','Micro-influencer seeding','Email list before paid ads'],risks:['CAC rising on Meta/Google','Inventory and logistics complexity','Brand differentiation is hard'],insight:'In 2025, distribution is the product. Build the audience before you build the store.',score:73},
+];
 
-function detectCategory(input){
-  const t=input.toLowerCase();
-  if(/marketplace|connect|platform|match|peer|p2p/.test(t))return'marketplace';
-  if(/saas|software|tool|dashboard|b2b|enterprise|productivity/.test(t))return'saas';
-  if(/subscription|box|monthly|recurring|membership/.test(t))return'subscription';
-  if(/food|meal|restaurant|delivery|chef|cook|eat/.test(t))return'foodtech';
-  if(/social|community|network|share|post|follow|creator/.test(t))return'social';
-  if(/device|hardware|wearable|gadget|iot|sensor|physical/.test(t))return'hardware';
-  if(/finance|payment|bank|invest|crypto|money|fintech/.test(t))return'fintech';
-  return'default';
+function runStrategyLens() {
+  const idea = document.getElementById('strategyInput').value.trim();
+  if (!idea) return;
+  const lower = idea.toLowerCase();
+  let match = PATTERNS.find(p => p.k.some(k => lower.includes(k))) || PATTERNS[1];
+  const score = match.score + Math.floor(Math.random()*10) - 5;
+  const verdict = score >= 75 ? 'HIGH POTENTIAL' : score >= 60 ? 'MODERATE POTENTIAL' : 'HIGH RISK';
+  const sub = score >= 75 ? 'Strong fundamentals. Execute fast and protect distribution.' : score >= 60 ? 'Solid concept with execution risks. Focus on distribution early.' : 'Challenging market. Validate demand before building.';
+  const scoreColor = score >= 75 ? 'var(--success)' : score >= 60 ? 'var(--accent2)' : '#ff4747';
+
+  document.getElementById('sScore').textContent = score;
+  document.getElementById('sScore').style.color = scoreColor;
+  document.getElementById('sVerdict').textContent = verdict;
+  document.getElementById('sScoreSub').textContent = sub;
+  document.getElementById('sMarket').textContent = match.market;
+  document.getElementById('sMoat').textContent = match.moat;
+  document.getElementById('sGTM').innerHTML = match.gtm.map(g=>`<li><div class="s-bullet"></div><span>${g}</span></li>`).join('');
+  document.getElementById('sRisks').innerHTML = match.risks.map(r=>`<div class="risk-item">⚠ ${r}</div>`).join('');
+  document.getElementById('sInsight').textContent = match.insight;
+
+  const result = document.getElementById('strategyResult');
+  result.classList.add('active');
+  result.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function runStrategyLens(){
-  const input=document.getElementById('strategyInput').value.trim();
-  if(!input)return;
-  const cat=detectCategory(input);
-  const data=STRATEGY_DB[cat];
-  const result=document.getElementById('strategyResult');
-  result.classList.remove('show');
-  setTimeout(()=>{
-    document.getElementById('s-market-title').textContent=cat.charAt(0).toUpperCase()+cat.slice(1)+' Play';
-    document.getElementById('s-market-list').innerHTML=data.market.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-moat-title').textContent='Build Your Moat';
-    document.getElementById('s-moat-list').innerHTML=data.moat.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-risks-title').textContent='Watch Out For';
-    document.getElementById('s-risks-list').innerHTML=data.risks.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-gtm-title').textContent='Launch Strategy';
-    document.getElementById('s-gtm-list').innerHTML=data.gtm.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-graveyard-ref').innerHTML=`<strong>// ☠ Graveyard Warning</strong>${data.ref}`;
-    document.getElementById('scoreNum').textContent=data.score+'/100';
-    document.getElementById('scoreFill').style.width='0%';
-    result.classList.add('show');
-    setTimeout(()=>{document.getElementById('scoreFill').style.width=data.score+'%';},100);
-  },100);
+function sendStrategyReport() {
+  const email = document.getElementById('strategyEmail').value.trim();
+  const idea = document.getElementById('strategyInput').value.trim();
+  if (!email || !idea) return;
+  fetch('https://formspree.io/f/mpqkddlz', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email, idea, _subject:`BizLens Strategy Report: ${idea.substring(0,50)}`})
+  }).then(()=>{
+    document.getElementById('strategyEmailSuccess').style.display='block';
+    document.getElementById('strategyEmail').value='';
+  }).catch(()=>{
+    document.getElementById('strategyEmailSuccess').style.display='block';
+    document.getElementById('strategyEmail').value='';
+  });
 }
 
-function sendStrategyReport(){
-  const email=document.getElementById('strategyEmail').value.trim();
-  const note=document.getElementById('strategyEmailNote');
-  if(!email||!email.includes('@')){note.style.color='var(--accent2)';note.textContent='// Please enter a valid email address';return;}
-  const input=document.getElementById('strategyInput').value.trim();
-  const cat=detectCategory(input);
-  const data=STRATEGY_DB[cat];
-  fetch('https://formspree.io/f/mpqkddlz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,_subject:'BizLens Strategy Report Request',idea:input,category:cat,score:data.score+'/100'})})
-  .then(()=>{note.style.color='var(--success)';note.textContent='✓ Report sent! Check your inbox shortly.';})
-  .catch(()=>{note.style.color='var(--success)';note.textContent='✓ Request received! We\'ll be in touch.';});
-}
-
-function handleSubscribe(e){
+// ---- SUBSCRIBE ----
+function handleSubscribe(e) {
   e.preventDefault();
-  const email=document.getElementById('subscribeEmail').value.trim();
-  fetch('https://formspree.io/f/mpqkddlz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,_subject:'New BizLens Subscriber'})})
-  .then(()=>{document.getElementById('subscribeSuccess').style.display='block';e.target.reset();})
-  .catch(()=>{document.getElementById('subscribeSuccess').style.display='block';e.target.reset();});
+  const email = document.getElementById('subscribeEmail').value.trim();
+  if (!email) return;
+  fetch('https://formspree.io/f/mpqkddlz', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email, _subject:'New BizLens Subscriber'})
+  }).then(()=>{
+    document.getElementById('subscribeSuccess').style.display='block';
+    e.target.reset();
+  }).catch(()=>{
+    document.getElementById('subscribeSuccess').style.display='block';
+    e.target.reset();
+  });
 }
 
+// ---- NAV ----
 function toggleMobileMenu(){
   document.getElementById('mobileMenu').classList.toggle('open');
   document.getElementById('hamburger').classList.toggle('open');
@@ -411,6 +485,7 @@ function closeMobileMenu(){
   document.getElementById('hamburger').classList.remove('open');
 }
 
+// ---- HERO ----
 function goAnalyze(){
   const v=document.getElementById('heroInput').value.trim();
   if(v)sessionStorage.setItem('bizlens_product',v);
