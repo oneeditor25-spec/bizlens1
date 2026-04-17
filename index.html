@@ -40,49 +40,19 @@
     .nav-cta{background:var(--accent)!important;color:#0a0a08!important;padding:8px 20px!important;font-weight:600!important}
     .nav-cta:hover{background:#fff!important}
 
-    /* GRAVEYARD TOGGLE */
-    .graveyard-toggle-wrap{display:flex;align-items:center;gap:10px;cursor:pointer}
-    .graveyard-toggle-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color .2s}
-    .graveyard-toggle-wrap:hover .graveyard-toggle-label{color:var(--accent2)}
-    .toggle-switch{position:relative;width:40px;height:22px}
-    .toggle-switch input{opacity:0;width:0;height:0}
-    .toggle-slider{position:absolute;inset:0;background:#1e1e1c;border:1px solid #333;border-radius:22px;cursor:pointer;transition:.3s}
-    .toggle-slider:before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background:var(--muted);border-radius:50%;transition:.3s}
-    input:checked+.toggle-slider{background:rgba(255,107,53,.15);border-color:var(--accent2)}
-    input:checked+.toggle-slider:before{transform:translateX(18px);background:var(--accent2)}
+    /* HAMBURGER */
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-    /* GRAVEYARD PANEL */
-    #graveyardPanel{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;z-index:90;background:var(--bg);overflow-y:auto;animation:slideDown .3s ease}
-    #graveyardPanel.active{display:block}
-    @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-    .graveyard-header{background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(10,10,8,0));border-bottom:1px solid rgba(255,107,53,.2);padding:40px 48px 32px}
-    .graveyard-header h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);color:var(--accent2);line-height:.9;margin-bottom:8px}
-    .graveyard-header p{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:2px}
-    .graveyard-controls{display:flex;gap:12px;padding:20px 48px;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
-    .graveyard-search{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:10px 16px;outline:none;transition:border-color .2s}
-    .graveyard-search:focus{border-color:var(--accent2)}
-    .graveyard-search::placeholder{color:var(--muted)}
-    .filter-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
-    .filter-btn:hover,.filter-btn.active{border-color:var(--accent2);color:var(--accent2);background:rgba(255,107,53,.08)}
-    .graveyard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--border);padding:1px;margin:0 48px 48px}
-    .grave-card{background:var(--bg);padding:28px;position:relative;overflow:hidden;transition:background .3s;cursor:default}
-    .grave-card:hover{background:var(--surface)}
-    .grave-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent2);transform:scaleX(0);transform-origin:left;transition:transform .3s}
-    .grave-card:hover::before{transform:scaleX(1)}
-    .grave-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--text);margin-bottom:4px}
-    .grave-meta{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
-    .grave-industry{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);padding:3px 8px;border:1px solid rgba(255,107,53,.3)}
-    .grave-year{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
-    .grave-capital{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
-    .grave-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
-    .grave-lesson{background:rgba(232,255,71,.04);border-left:2px solid var(--accent);padding:10px 14px;font-size:12px;color:var(--text);line-height:1.6;margin-bottom:14px}
-    .grave-lesson strong{color:var(--accent);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;display:block;margin-bottom:4px}
-    .grave-tags{display:flex;gap:6px;flex-wrap:wrap}
-    .grave-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border)}
-    .graveyard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:0 48px 32px}
-    .gstat{background:var(--surface);padding:24px;text-align:center}
-    .gstat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent2);line-height:1}
-    .gstat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px}
+    /* MOBILE MENU */
+    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,8,.98);border-bottom:1px solid var(--border);z-index:99;padding:24px;flex-direction:column;gap:20px;transform:translateY(-10px);opacity:0;transition:all .3s}
+    .mobile-menu.open{display:flex;transform:translateY(0);opacity:1}
+    .mobile-menu a{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border)}
+    .mobile-menu a:hover{color:var(--accent)}
+    .mobile-menu .mob-cta{background:var(--accent);color:#0a0a08;padding:14px 20px;text-align:center;font-weight:600;border:none}
 
     /* HERO */
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}
@@ -112,6 +82,8 @@
     .section{padding:100px 48px;max-width:1200px;margin:0 auto}
     .section-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
     .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:.9;margin-bottom:60px}
+
+    /* FEATURES */
     .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
     .feature{background:var(--bg);padding:36px 32px;position:relative;overflow:hidden;transition:background .3s}
     .feature:hover{background:var(--surface)}
@@ -120,6 +92,8 @@
     .feature-desc{font-size:13px;color:var(--muted);line-height:1.7}
     .feature-accent{position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--accent);transition:width .3s ease}
     .feature:hover .feature-accent{width:100%}
+
+    /* STEPS */
     .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
     .step{background:var(--surface);padding:40px 32px}
     .step-num{font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:1;color:var(--border);margin-bottom:16px}
@@ -127,68 +101,50 @@
     .step-desc{font-size:14px;color:var(--muted);line-height:1.7}
 
     /* STRATEGY LENS */
-    .strategy-section{padding:100px 48px;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .strategy-inner{max-width:900px;margin:0 auto}
-    .strategy-input-wrap{display:flex;gap:0;margin-bottom:12px}
-    .strategy-input{flex:1;background:var(--bg);border:1px solid rgba(71,184,255,.3);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:16px 20px;outline:none;transition:border-color .2s;resize:none;height:56px}
-    .strategy-input:focus{border-color:var(--accent3)}
+    #strategy{background:var(--surface);padding:80px 0}
+    .strategy-inner{max-width:1200px;margin:0 auto;padding:0 48px}
+    .strategy-input-row{display:flex;gap:0;max-width:640px;margin-bottom:40px}
+    .strategy-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:14px 18px;outline:none;transition:border-color .2s}
+    .strategy-input:focus{border-color:var(--accent)}
     .strategy-input::placeholder{color:var(--muted)}
-    .strategy-btn{background:var(--accent3);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:0 28px;cursor:pointer;transition:background .2s;white-space:nowrap}
+    .strategy-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:0 28px;cursor:pointer;transition:background .2s}
     .strategy-btn:hover{background:#fff}
-    .strategy-hint{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:32px}
-    .strategy-result{display:none;animation:fadeUp .4s ease both}
-    .strategy-result.show{display:block}
-    .strategy-score-bar{display:flex;align-items:center;gap:16px;margin-bottom:32px;padding:20px 24px;background:var(--bg);border:1px solid var(--border)}
-    .score-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-    .score-track{flex:1;height:6px;background:var(--border);position:relative}
-    .score-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 1s ease}
-    .score-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--accent);white-space:nowrap}
-    .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-bottom:1px}
-    .strategy-card{background:var(--bg);padding:24px;border-top:2px solid transparent}
-    .strategy-card.market{border-color:var(--accent)}
-    .strategy-card.moat{border-color:var(--accent3)}
-    .strategy-card.risks{border-color:var(--accent2)}
-    .strategy-card.gtm{border-color:var(--success)}
-    .strategy-card-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-    .strategy-card-title{font-family:'Bebas Neue',sans-serif;font-size:22px;margin-bottom:12px}
-    .strategy-card.market .strategy-card-title{color:var(--accent)}
-    .strategy-card.moat .strategy-card-title{color:var(--accent3)}
-    .strategy-card.risks .strategy-card-title{color:var(--accent2)}
-    .strategy-card.gtm .strategy-card-title{color:var(--success)}
-    .strategy-card ul{list-style:none;padding:0}
-    .strategy-card ul li{font-size:13px;color:var(--muted);line-height:1.8;padding-left:14px;position:relative}
-    .strategy-card ul li::before{content:'→';position:absolute;left:0;color:inherit;font-size:11px}
-    .strategy-card.market ul li::before{color:var(--accent)}
-    .strategy-card.moat ul li::before{color:var(--accent3)}
-    .strategy-card.risks ul li::before{color:var(--accent2)}
-    .strategy-card.gtm ul li::before{color:var(--success)}
-    .strategy-graveyard-link{background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);padding:16px 20px;margin-top:1px;font-size:13px;color:var(--muted);line-height:1.7}
-    .strategy-graveyard-link strong{color:var(--accent2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;display:block;margin-bottom:6px}
-    .strategy-email-prompt{margin-top:16px;display:flex;gap:0;max-width:480px}
-    .strategy-email-input{flex:1;background:var(--bg);border:1px solid rgba(232,255,71,.2);border-right:none;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:12px 16px;outline:none}
+    .strategy-result{display:none;opacity:0;transform:translateY(16px);transition:all .4s ease}
+    .strategy-result.show{display:block;opacity:1;transform:translateY(0)}
+    .strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:2px}
+    .s-card{background:var(--bg);border:1px solid var(--border);padding:24px 28px}
+    .s-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--accent);margin-bottom:14px}
+    .s-card ul{list-style:none}
+    .s-card li{font-size:13px;color:#c8c6c0;padding:6px 0;border-bottom:1px solid var(--border);line-height:1.5}
+    .s-card li:last-child{border-bottom:none}
+    .s-card li::before{content:'→ ';color:var(--accent);font-family:'DM Mono',monospace}
+    .score-bar-wrap{background:var(--bg);border:1px solid var(--border);padding:24px 28px;margin-bottom:2px}
+    .score-bar-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+    .score-bar-track{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:8px}
+    .score-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));border-radius:2px;transition:width 1s ease;width:0}
+    .score-bar-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--accent)}
+    .graveyard-ref{background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);padding:16px 20px;font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:2px}
+    .graveyard-ref strong{display:block;color:var(--accent2);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;margin-bottom:6px}
+    .strategy-email-row{display:flex;gap:0;max-width:480px;margin-top:20px}
+    .strategy-email-input{flex:1;background:var(--bg);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;outline:none}
     .strategy-email-input:focus{border-color:var(--accent)}
     .strategy-email-input::placeholder{color:var(--muted)}
-    .strategy-email-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:0 20px;cursor:pointer;transition:background .2s}
-    .strategy-email-btn:hover{background:#fff}
-    .strategy-email-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:1px}
+    .strategy-email-btn{background:var(--surface);color:var(--accent);border:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:0 20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .strategy-email-btn:hover{background:var(--accent);color:#0a0a08}
+    .strategy-email-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:8px}
 
-    /* EMAIL SUBSCRIPTION */
-    .subscribe-section{padding:80px 48px;background:var(--bg);border-top:1px solid var(--border)}
-    .subscribe-inner{max-width:700px;margin:0 auto;text-align:center}
-    .subscribe-inner .section-label{justify-content:center;display:block}
-    .subscribe-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);line-height:.9;margin-bottom:16px}
-    .subscribe-title span{color:var(--accent)}
-    .subscribe-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
-    .subscribe-form{display:flex;gap:0;max-width:480px;margin:0 auto 12px}
-    .subscribe-email{flex:1;background:var(--surface);border:1px solid rgba(232,255,71,.3);border-right:none;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:14px 18px;outline:none;transition:border-color .2s}
-    .subscribe-email:focus{border-color:var(--accent)}
-    .subscribe-email::placeholder{color:var(--muted)}
-    .subscribe-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:0 24px;cursor:pointer;transition:background .2s;white-space:nowrap}
+    /* EMAIL SUBSCRIBE */
+    #subscribe{padding:80px 0;border-top:1px solid var(--border)}
+    .subscribe-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+    .subscribe-text h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,56px);line-height:.9;margin-bottom:12px}
+    .subscribe-text p{font-size:14px;color:var(--muted);line-height:1.6;max-width:360px}
+    .subscribe-form{display:flex;gap:0;flex:1;max-width:440px}
+    .subscribe-input{flex:1;background:var(--surface);border:1px solid var(--border);border-right:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color .2s}
+    .subscribe-input:focus{border-color:var(--accent)}
+    .subscribe-input::placeholder{color:var(--muted)}
+    .subscribe-btn{background:var(--accent);color:#0a0a08;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:0 24px;cursor:pointer;transition:background .2s;white-space:nowrap}
     .subscribe-btn:hover{background:#fff}
-    .subscribe-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .subscribe-perk{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--muted);display:flex;align-items:center;gap:6px}
-    .subscribe-perk span{color:var(--accent)}
-    .subscribe-success{display:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--success);letter-spacing:2px;text-transform:uppercase;padding:14px;border:1px solid rgba(77,255,145,.2);background:rgba(77,255,145,.04);margin-top:12px}
+    .subscribe-success{display:none;font-family:'DM Mono',monospace;font-size:12px;color:var(--success);margin-top:10px;letter-spacing:1px}
 
     /* CTA */
     .cta-section{background:var(--accent);padding:80px 48px;text-align:center}
@@ -196,151 +152,66 @@
     .cta-section p{font-size:16px;color:rgba(10,10,8,.6);margin-bottom:36px}
     .cta-btn{display:inline-block;background:#0a0a08;color:var(--accent);font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;padding:16px 48px;text-decoration:none;transition:all .2s}
     .cta-btn:hover{background:#fff;color:#0a0a08}
+
+    /* FOOTER */
     footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
     .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent)}
     .footer-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
+
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-    /* HAMBURGER MENU */
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:200}
-    .hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all .3s}
-    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-    .hamburger.open span:nth-child(2){opacity:0}
-    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,8,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:150;flex-direction:column;padding:20px 24px;gap:0}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a,.mobile-menu .mobile-graveyard-row{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:14px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;transition:color .2s}
-    .mobile-menu a:hover{color:var(--text)}
-    .mobile-menu .mobile-cta{color:var(--accent)!important;font-weight:600}
-    .mobile-graveyard-row{cursor:pointer}
-    .mobile-graveyard-row:hover .graveyard-toggle-label{color:var(--accent2)}
-
-    /* ── TABLET (≤ 1024px) ── */
-    @media(max-width:1024px){
-      nav{padding:0 32px}
-      .section{padding:80px 32px}
-      .features-grid{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:repeat(3,1fr)}
-      .graveyard-header,.graveyard-controls,.graveyard-grid,.graveyard-stats{padding-left:32px;padding-right:32px}
-      .strategy-section{padding:80px 32px}
-      .subscribe-section{padding:70px 32px}
-      .cta-section{padding:70px 32px}
-      footer{padding:28px 32px}
-    }
-
-    /* ── SMALL TABLET / LARGE MOBILE (≤ 768px) ── */
-    @media(max-width:768px){
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .features-grid,.steps{grid-template-columns:1fr 1fr}
       nav{padding:0 20px}
+      .section{padding:60px 20px}
+      footer{padding:24px 20px}
+      .cta-section{padding:60px 24px}
+      .strategy-inner{padding:0 20px}
+      .subscribe-inner{padding:0 20px}
+      .strategy-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .features-grid,.steps{grid-template-columns:1fr}
       .nav-links{display:none}
       .hamburger{display:flex}
-      .section{padding:60px 20px}
-      .features-grid{grid-template-columns:repeat(2,1fr)}
-      .steps{grid-template-columns:1fr 1fr}
-      .graveyard-header{padding:28px 20px 20px}
-      .graveyard-controls{padding:16px 20px;gap:8px}
-      .graveyard-grid{margin:0 20px 32px;grid-template-columns:1fr}
-      .graveyard-stats{margin:0 20px 24px;grid-template-columns:repeat(2,1fr)}
-      .gstat-num{font-size:36px}
-      .strategy-section{padding:60px 20px}
-      .strategy-grid{grid-template-columns:1fr}
-      .strategy-input-wrap{flex-direction:column}
-      .strategy-input{border-right:1px solid rgba(71,184,255,.3);height:auto}
-      .strategy-btn{padding:14px;width:100%}
-      .strategy-email-prompt{max-width:100%}
-      .subscribe-section{padding:60px 20px}
-      .subscribe-form{flex-direction:column;max-width:100%}
-      .subscribe-email{border-right:1px solid rgba(232,255,71,.3)}
-      .subscribe-btn{padding:14px;width:100%}
-      .cta-section{padding:60px 20px}
-      footer{padding:24px 20px;flex-direction:column;text-align:center;gap:8px}
       .hero-input-group{flex-direction:column}
       .hero-input{border-right:1px solid rgba(232,255,71,.3)}
-      .hero-btn{padding:16px;width:100%}
-      .score-label{display:none}
-    }
-
-    /* ── MOBILE (≤ 480px) ── */
-    @media(max-width:480px){
-      .features-grid{grid-template-columns:1fr}
-      .steps{grid-template-columns:1fr}
-      .hero-title{font-size:clamp(52px,16vw,80px)}
-      .hero-subtitle{font-size:15px}
-      .graveyard-stats{grid-template-columns:1fr 1fr}
-      .gstat{padding:16px 10px}
-      .gstat-num{font-size:30px}
-      .gstat-label{font-size:9px}
-      .grave-card{padding:20px}
-      .grave-name{font-size:22px}
-      .filter-btn{font-size:9px;padding:6px 10px}
-      .strategy-score-bar{flex-wrap:wrap;gap:10px}
-      .score-track{width:100%;order:3;flex:unset}
-      .score-num{font-size:24px}
-      .subscribe-perks{flex-direction:column;align-items:center;gap:10px}
-      .cta-section h2{font-size:clamp(40px,12vw,72px)}
-      .cta-btn{font-size:18px;padding:14px 32px}
-      .section-title{font-size:clamp(36px,10vw,56px)}
-      .step-num{font-size:60px}
+      .hero-btn{padding:16px}
+      .strategy-input-row{flex-direction:column}
+      .strategy-input{border-right:1px solid var(--border)}
+      .strategy-btn{padding:14px}
+      .subscribe-form{flex-direction:column}
+      .subscribe-input{border-right:1px solid var(--border)}
+      .subscribe-btn{padding:14px}
+      .subscribe-inner{flex-direction:column}
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">BizLens</a>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#how">How It Works</a>
     <a href="#strategy">Strategy Lens</a>
-    <div class="graveyard-toggle-wrap" onclick="toggleGraveyard()">
-      <span class="graveyard-toggle-label">☠ Graveyard</span>
-      <label class="toggle-switch" onclick="event.stopPropagation()">
-        <input type="checkbox" id="graveyardToggle" onchange="toggleGraveyard()">
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
+    <a href="graveyard.html">☠ Graveyard</a>
     <a href="analyze.html" class="nav-cta">Try It Free →</a>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="closeMobileMenu()">Features</a>
   <a href="#how" onclick="closeMobileMenu()">How It Works</a>
   <a href="#strategy" onclick="closeMobileMenu()">Strategy Lens</a>
-  <div class="mobile-graveyard-row" onclick="closeMobileMenu();toggleGraveyard()">
-    <span class="graveyard-toggle-label">☠ Graveyard</span>
-    <label class="toggle-switch" onclick="event.stopPropagation()">
-      <input type="checkbox" id="graveyardToggleMobile" onchange="closeMobileMenu();toggleGraveyard()">
-      <span class="toggle-slider"></span>
-    </label>
-  </div>
-  <a href="analyze.html" class="mobile-cta">Try It Free →</a>
+  <a href="graveyard.html" onclick="closeMobileMenu()">☠ Graveyard</a>
+  <a href="analyze.html" class="mob-cta">Try It Free →</a>
 </div>
 
-<!-- GRAVEYARD PANEL -->
-<div id="graveyardPanel">
-  <div class="graveyard-header">
-    <h2>☠ Startup<br>Graveyard</h2>
-    <p>// Real failures. Real lessons. Don't repeat history.</p>
-  </div>
-  <div class="graveyard-stats" id="graveyardStats"></div>
-  <div class="graveyard-controls">
-    <input class="graveyard-search" id="graveyardSearch" type="text" placeholder="Search startups, industries, lessons..." oninput="renderGraveyard()">
-    <button class="filter-btn active" data-filter="all" onclick="setFilter(this,'all')">All</button>
-    <button class="filter-btn" data-filter="SaaS" onclick="setFilter(this,'SaaS')">SaaS</button>
-    <button class="filter-btn" data-filter="E-Commerce" onclick="setFilter(this,'E-Commerce')">E-Commerce</button>
-    <button class="filter-btn" data-filter="FinTech" onclick="setFilter(this,'FinTech')">FinTech</button>
-    <button class="filter-btn" data-filter="Social" onclick="setFilter(this,'Social')">Social</button>
-    <button class="filter-btn" data-filter="Hardware" onclick="setFilter(this,'Hardware')">Hardware</button>
-  </div>
-  <div class="graveyard-grid" id="graveyardGrid"></div>
-</div>
-
-<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-content">
@@ -355,7 +226,6 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
     <div class="ticker-item"><span>→</span> Nike</div><div class="ticker-item"><span>→</span> Spotify</div><div class="ticker-item"><span>→</span> Red Bull</div><div class="ticker-item"><span>→</span> Apple</div><div class="ticker-item"><span>→</span> Tesla</div><div class="ticker-item"><span>→</span> Airbnb</div><div class="ticker-item"><span>→</span> Duolingo</div><div class="ticker-item"><span>→</span> McDonald's</div><div class="ticker-item"><span>→</span> Notion</div><div class="ticker-item"><span>→</span> Zara</div>
@@ -363,7 +233,6 @@
   </div>
 </div>
 
-<!-- FEATURES -->
 <section class="section" id="features">
   <div class="section-label">// What You Get</div>
   <div class="section-title">Every Angle.<br>Every Strategy.</div>
@@ -377,7 +246,6 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section style="background:var(--surface);padding:80px 0" id="how">
   <div class="section" style="padding-top:0;padding-bottom:0">
     <div class="section-label">// How It Works</div>
@@ -390,81 +258,70 @@
   </div>
 </section>
 
-<!-- STRATEGY LENS -->
-<section class="strategy-section" id="strategy">
+<!-- STRATEGY LENS SECTION -->
+<section id="strategy">
   <div class="strategy-inner">
-    <div class="section-label">// Strategy Lens — New</div>
-    <div class="section-title" style="margin-bottom:12px">Validate Your<br><span style="color:var(--accent3)">Startup Idea</span></div>
-    <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:560px">Describe your startup idea or business problem. Get an instant structured strategy breakdown — market, moat, risks, and go-to-market. Powered by pattern intelligence from 500+ real businesses.</p>
-    <div class="strategy-input-wrap">
-      <input class="strategy-input" id="strategyInput" type="text" placeholder="e.g. An app that connects freelance chefs with home dinner parties...">
+    <div class="section-label">// AI Strategy Analyzer</div>
+    <div class="section-title">Strategy<br>Lens</div>
+    <p style="font-size:15px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:36px">Describe your startup idea and get an instant strategy breakdown — target market, competitive moat, failure risks, and go-to-market plan.</p>
+    <div class="strategy-input-row">
+      <input class="strategy-input" id="strategyInput" type="text" placeholder="e.g. A marketplace for freelance designers...">
       <button class="strategy-btn" onclick="runStrategyLens()">ANALYZE →</button>
     </div>
-    <div class="strategy-hint">// Try: "subscription box for pet owners" · "B2B SaaS for HR teams" · "marketplace for local tutors"</div>
     <div class="strategy-result" id="strategyResult">
-      <div class="strategy-score-bar">
-        <span class="score-label">Viability Score</span>
-        <div class="score-track"><div class="score-fill" id="scoreFill" style="width:0%"></div></div>
-        <span class="score-num" id="scoreNum">0</span>
-      </div>
       <div class="strategy-grid">
-        <div class="strategy-card market">
-          <div class="strategy-card-label">Target Market</div>
-          <div class="strategy-card-title" id="s-market-title">—</div>
+        <div class="s-card">
+          <div class="s-card-title" id="s-market-title">Target Market</div>
           <ul id="s-market-list"></ul>
         </div>
-        <div class="strategy-card moat">
-          <div class="strategy-card-label">Competitive Moat</div>
-          <div class="strategy-card-title" id="s-moat-title">—</div>
+        <div class="s-card">
+          <div class="s-card-title" id="s-moat-title">Build Your Moat</div>
           <ul id="s-moat-list"></ul>
         </div>
-        <div class="strategy-card risks">
-          <div class="strategy-card-label">Top 3 Failure Risks</div>
-          <div class="strategy-card-title" id="s-risks-title">—</div>
+        <div class="s-card">
+          <div class="s-card-title" id="s-risks-title">Watch Out For</div>
           <ul id="s-risks-list"></ul>
         </div>
-        <div class="strategy-card gtm">
-          <div class="strategy-card-label">Go-To-Market</div>
-          <div class="strategy-card-title" id="s-gtm-title">—</div>
+        <div class="s-card">
+          <div class="s-card-title" id="s-gtm-title">Launch Strategy</div>
           <ul id="s-gtm-list"></ul>
         </div>
       </div>
-      <div class="strategy-graveyard-link" id="s-graveyard-ref"></div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label">// Viability Score</div>
+        <div class="score-bar-num" id="scoreNum">—</div>
+        <div class="score-bar-track"><div class="score-bar-fill" id="scoreFill"></div></div>
+      </div>
+      <div class="graveyard-ref" id="s-graveyard-ref"></div>
       <div style="margin-top:20px">
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:10px">// GET FULL REPORT IN YOUR INBOX</div>
-        <div class="strategy-email-prompt">
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:10px">// GET FULL REPORT VIA EMAIL</div>
+        <div class="strategy-email-row">
           <input class="strategy-email-input" id="strategyEmail" type="email" placeholder="your@email.com">
-          <button class="strategy-email-btn" onclick="sendStrategyReport()">SEND →</button>
+          <button class="strategy-email-btn" onclick="sendStrategyReport()">SEND REPORT</button>
         </div>
-        <div class="strategy-email-note" id="strategyEmailNote">// We'll send your full strategy breakdown + similar failure case studies</div>
+        <div class="strategy-email-note" id="strategyEmailNote"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EMAIL SUBSCRIPTION -->
-<section class="subscribe-section" id="subscribe">
+<!-- EMAIL SUBSCRIBE SECTION -->
+<section id="subscribe">
   <div class="subscribe-inner">
-    <div class="section-label">// Weekly Intelligence Drop</div>
-    <div class="subscribe-title">Stay Sharp.<br>Stay <span>Ahead.</span></div>
-    <p class="subscribe-desc">Get weekly breakdowns of business strategies, startup failures, and market moves — straight to your inbox. No fluff. Just signal.</p>
-    <form class="subscribe-form" action="https://formspree.io/f/mpqkddlz" method="POST" onsubmit="handleSubscribe(event)">
-      <input class="subscribe-email" type="email" name="email" id="subscribeEmail" placeholder="Enter your email address" required>
-      <input type="hidden" name="_subject" value="New BizLens Subscriber">
-      <input type="hidden" name="_replyto" value="oneeditor25@gmail.com">
-      <button class="subscribe-btn" type="submit">SUBSCRIBE →</button>
-    </form>
-    <div class="subscribe-success" id="subscribeSuccess">✓ You're in! First drop lands this week.</div>
-    <div class="subscribe-perks">
-      <div class="subscribe-perk"><span>✓</span> Weekly strategy breakdowns</div>
-      <div class="subscribe-perk"><span>✓</span> Startup failure case studies</div>
-      <div class="subscribe-perk"><span>✓</span> No spam, ever</div>
-      <div class="subscribe-perk"><span>✓</span> Unsubscribe anytime</div>
+    <div class="subscribe-text">
+      <h2>Daily Business<br><span style="color:var(--accent)">Insights</span></h2>
+      <p>Get daily startup strategies, market breakdowns, and business intelligence delivered to your inbox.</p>
+    </div>
+    <div>
+      <form class="subscribe-form" onsubmit="handleSubscribe(event)" action="https://formspree.io/f/mpqkddlz" method="POST">
+        <input class="subscribe-input" id="subscribeEmail" name="email" type="email" placeholder="Enter your email...">
+        <button class="subscribe-btn" type="submit">SUBSCRIBE</button>
+      </form>
+      <div class="subscribe-success" id="subscribeSuccess">✓ You're in! First insight lands tomorrow.</div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <h2>Start Seeing<br>Like a Strategist</h2>
   <p>Free. Instant. No signup needed.</p>
@@ -478,224 +335,91 @@
 </footer>
 
 <script>
-// ─── GRAVEYARD DATA ───────────────────────────────────────────────
-const GRAVEYARD = [
-  {name:"Quibi",industry:"Media",tags:["streaming","mobile","content"],capital:"$1.75B",year:2020,desc:"Mobile-only short-form video platform that shut down after 6 months despite massive funding.",lesson:"Product-market fit can't be bought. Quibi solved a problem nobody had.",pattern:"Wrong timing + wrong format"},
-  {name:"Theranos",industry:"HealthTech",tags:["biotech","fraud","hardware"],capital:"$900M",year:2018,desc:"Blood-testing startup that claimed revolutionary tech but was built on lies.",lesson:"In regulated industries, fake it till you make it is a criminal strategy.",pattern:"Fraud + regulatory failure"},
-  {name:"WeWork",industry:"PropTech",tags:["real-estate","SaaS","B2B"],capital:"$11B",year:2019,desc:"Co-working giant that imploded before IPO due to governance chaos and unsustainable unit economics.",lesson:"Growth at all costs without unit economics is a time bomb.",pattern:"Bad unit economics + governance"},
-  {name:"Vine",industry:"Social",tags:["video","social","mobile"],capital:"$30M",year:2016,desc:"6-second video platform acquired by Twitter, then shut down as Instagram and Snapchat ate its lunch.",lesson:"Platforms that don't pay creators lose creators — and then users.",pattern:"Creator monetization failure"},
-  {name:"Google+",industry:"Social",tags:["social","google","network"],capital:"$585M",year:2019,desc:"Google's attempt to take on Facebook failed despite massive resources and forced integration.",lesson:"Network effects are winner-take-all. Late movers need a radically different angle.",pattern:"Network effect disadvantage"},
-  {name:"Juicero",industry:"Hardware",tags:["hardware","food","IoT"],capital:"$120M",year:2017,desc:"$400 Wi-Fi connected juice press that was made redundant when users discovered they could squeeze the packs by hand.",lesson:"Technology should solve a real problem, not create a fake one.",pattern:"Solution looking for a problem"},
-  {name:"Fab.com",industry:"E-Commerce",tags:["e-commerce","design","marketplace"],capital:"$336M",year:2015,desc:"Flash-sale design marketplace that pivoted too many times and burned through cash chasing growth.",lesson:"Pivoting without conviction kills companies faster than staying the course.",pattern:"Pivot fatigue + cash burn"},
-  {name:"Rdio",industry:"Media",tags:["music","streaming","SaaS"],capital:"$17.5M",year:2015,desc:"Music streaming pioneer that lost to Spotify despite having a better product.",lesson:"Distribution and marketing matter as much as product quality.",pattern:"Out-distributed by competitor"},
-  {name:"Jawbone",industry:"Hardware",tags:["wearables","hardware","health"],capital:"$930M",year:2017,desc:"Fitness tracker company that couldn't compete with Apple Watch and Fitbit on hardware quality.",lesson:"Hardware is brutally capital intensive. Without manufacturing excellence, you die.",pattern:"Hardware execution failure"},
-  {name:"Yik Yak",industry:"Social",tags:["social","anonymous","mobile"],capital:"$73.5M",year:2017,desc:"Anonymous location-based social app plagued by cyberbullying that killed its user base.",lesson:"Anonymity without moderation is a product liability, not a feature.",pattern:"Moderation failure"},
-  {name:"Homejoy",industry:"Marketplace",tags:["marketplace","cleaning","gig-economy"],capital:"$38M",year:2015,desc:"On-demand home cleaning startup shut down after worker misclassification lawsuits.",lesson:"Regulatory risk in gig economy models is existential, not theoretical.",pattern:"Legal/regulatory risk"},
-  {name:"Munchery",industry:"FoodTech",tags:["food","delivery","marketplace"],capital:"$125M",year:2019,desc:"Meal delivery startup that couldn't crack unit economics in a brutally competitive market.",lesson:"Food delivery has razor-thin margins. Without scale, you bleed out.",pattern:"Unit economics failure"},
-  {name:"Beepi",industry:"Marketplace",tags:["automotive","marketplace","peer-to-peer"],capital:"$149M",year:2017,desc:"Peer-to-peer used car marketplace that burned cash on operations faster than it could grow.",lesson:"Operational complexity in physical marketplaces destroys margins.",pattern:"Operational complexity"},
-  {name:"Shyp",industry:"Logistics",tags:["logistics","on-demand","B2C"],capital:"$62M",year:2018,desc:"On-demand shipping startup that underpriced its service and couldn't scale profitably.",lesson:"Underpricing to acquire users is a trap if your cost structure doesn't improve with scale.",pattern:"Pricing strategy failure"},
-  {name:"Daqri",industry:"Hardware",tags:["AR","hardware","enterprise"],capital:"$275M",year:2019,desc:"Enterprise AR headset company that ran out of runway before the market matured.",lesson:"Enterprise hardware adoption cycles are 5-10x longer than consumer. Plan accordingly.",pattern:"Market timing failure"},
-  {name:"Zirtual",industry:"SaaS",tags:["SaaS","productivity","marketplace"],capital:"$5.5M",year:2015,desc:"Virtual assistant marketplace that shut down overnight, leaving 400 employees without pay.",lesson:"Scaling headcount without matching revenue is a payroll time bomb.",pattern:"Scaling without revenue"},
-  {name:"Rdio",industry:"Media",tags:["music","streaming","B2C"],capital:"$17.5M",year:2015,desc:"Music streaming service with a loyal user base that couldn't survive Spotify's aggressive expansion.",lesson:"Being first or best doesn't guarantee survival — distribution does.",pattern:"Distribution failure"},
-  {name:"Pebble",industry:"Hardware",tags:["wearables","hardware","crowdfunding"],capital:"$26M",year:2016,desc:"Pioneering smartwatch brand that was crushed by Apple Watch despite a passionate community.",lesson:"Passionate early adopters don't protect you from a trillion-dollar competitor entering your market.",pattern:"Big tech competition"},
-  {name:"Secret",industry:"Social",tags:["social","anonymous","mobile"],capital:"$35M",year:2015,desc:"Anonymous sharing app shut down by its own founder due to cyberbullying and harassment.",lesson:"Founders have a responsibility to anticipate how their product will be misused.",pattern:"Product misuse + ethics"},
-  {name:"Rdio",industry:"Media",tags:["music","streaming"],capital:"$17.5M",year:2015,desc:"Music streaming pioneer that lost to Spotify despite having a better product.",lesson:"Distribution and marketing matter as much as product quality.",pattern:"Out-distributed"},
-  {name:"Solyndra",industry:"CleanTech",tags:["solar","hardware","government"],capital:"$1.1B",year:2011,desc:"Solar panel manufacturer that collapsed when Chinese competitors undercut prices by 75%.",lesson:"Government subsidies can mask fundamental cost structure problems.",pattern:"Cost structure failure"},
-  {name:"Rdio",industry:"Media",tags:["music","streaming"],capital:"$17.5M",year:2015,desc:"Music streaming pioneer that lost to Spotify despite having a better product.",lesson:"Distribution and marketing matter as much as product quality.",pattern:"Out-distributed"},
-  {name:"Loot Crate",industry:"E-Commerce",tags:["subscription","e-commerce","gaming"],capital:"$29M",year:2019,desc:"Gaming subscription box company that over-expanded and couldn't fulfill orders, leading to bankruptcy.",lesson:"Subscription businesses must nail fulfillment before scaling. Broken promises kill retention.",pattern:"Operational scaling failure"},
-  {name:"Rdio",industry:"Media",tags:["music","streaming"],capital:"$17.5M",year:2015,desc:"Music streaming pioneer that lost to Spotify despite having a better product.",lesson:"Distribution and marketing matter as much as product quality.",pattern:"Out-distributed"},
-];
-
-// Deduplicate
-const GRAVES = [...new Map(GRAVEYARD.map(g=>[g.name,g])).values()];
-
-let currentFilter = 'all';
-
-function toggleGraveyard(){
-  const panel = document.getElementById('graveyardPanel');
-  const toggle = document.getElementById('graveyardToggle');
-  const isActive = panel.classList.contains('active');
-  if(isActive){
-    panel.classList.remove('active');
-    toggle.checked = false;
-    document.body.style.overflow = '';
-  } else {
-    panel.classList.add('active');
-    toggle.checked = true;
-    document.body.style.overflow = 'hidden';
-    renderGraveyard();
-    renderStats();
-  }
-}
-
-function setFilter(btn, filter){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter = filter;
-  renderGraveyard();
-}
-
-function renderStats(){
-  const totalCapital = GRAVES.reduce((sum,g)=>{
-    const n = parseFloat(g.capital.replace(/[$MB]/g,''));
-    return sum + (g.capital.includes('B') ? n*1000 : n);
-  },0);
-  document.getElementById('graveyardStats').innerHTML = `
-    <div class="gstat"><div class="gstat-num">${GRAVES.length}</div><div class="gstat-label">Startups Buried</div></div>
-    <div class="gstat"><div class="gstat-num">$${(totalCapital/1000).toFixed(1)}B</div><div class="gstat-label">Capital Burned</div></div>
-    <div class="gstat"><div class="gstat-num">${[...new Set(GRAVES.map(g=>g.industry))].length}</div><div class="gstat-label">Industries</div></div>
-    <div class="gstat"><div class="gstat-num">${[...new Set(GRAVES.map(g=>g.pattern))].length}</div><div class="gstat-label">Failure Patterns</div></div>
-  `;
-}
-
-function renderGraveyard(){
-  const q = document.getElementById('graveyardSearch').value.toLowerCase();
-  let data = GRAVES.filter(g=>{
-    const matchFilter = currentFilter==='all' || g.industry===currentFilter || g.tags.includes(currentFilter);
-    const matchSearch = !q || g.name.toLowerCase().includes(q) || g.industry.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q) || g.lesson.toLowerCase().includes(q) || g.tags.some(t=>t.includes(q));
-    return matchFilter && matchSearch;
-  });
-  document.getElementById('graveyardGrid').innerHTML = data.map(g=>`
-    <div class="grave-card">
-      <div class="grave-name">${g.name}</div>
-      <div class="grave-meta">
-        <span class="grave-industry">${g.industry}</span>
-        <span class="grave-year">☠ ${g.year}</span>
-        <span class="grave-capital">${g.capital} burned</span>
-      </div>
-      <div class="grave-desc">${g.desc}</div>
-      <div class="grave-lesson"><strong>// Key Lesson</strong>${g.lesson}</div>
-      <div class="grave-tags">${g.tags.map(t=>`<span class="grave-tag">${t}</span>`).join('')}<span class="grave-tag" style="border-color:rgba(255,107,53,.3);color:var(--accent2)">${g.pattern}</span></div>
-    </div>
-  `).join('') || '<div style="padding:48px;font-family:\'DM Mono\',monospace;font-size:12px;color:var(--muted);letter-spacing:2px">// No results found</div>';
-}
-
-// ─── STRATEGY LENS ────────────────────────────────────────────────
 const STRATEGY_DB = {
-  marketplace:   {market:["Two-sided marketplace users","SMBs needing efficiency","Consumers seeking convenience"],moat:["Network effects (supply+demand)","Trust & review system","Proprietary matching algorithm"],risks:["Chicken-and-egg problem at launch","Disintermediation by power users","Unit economics collapse at scale"],gtm:["Start hyper-local, dominate one city","Seed supply side first with subsidies","Use content marketing to attract demand"],score:62,ref:"Homejoy burned $38M solving the wrong side of the marketplace first. Beepi ($149M) died from operational complexity."},
-  saas:          {market:["B2B decision makers","SMB owners","Enterprise IT teams"],moat:["Switching costs & data lock-in","Workflow integration depth","API ecosystem"],risks:["Feature parity from incumbents","Long enterprise sales cycles","Churn if onboarding is poor"],gtm:["Bottom-up PLG with free tier","Target one vertical deeply first","Partner with complementary tools"],score:74,ref:"Zirtual ($5.5M) scaled headcount before revenue. Many SaaS cos die from CAC > LTV."},
-  subscription:  {market:["Enthusiast communities","Recurring need consumers","Gift buyers"],moat:["Curation expertise","Community & identity","Switching inertia"],risks:["Subscriber fatigue & churn","Fulfillment complexity at scale","Margin compression from COGS"],gtm:["Launch with a waitlist & exclusivity","Partner with influencers in the niche","Nail the unboxing experience first"],score:58,ref:"Loot Crate ($29M) over-expanded and couldn't fulfill orders. Subscription businesses must nail ops before scaling."},
-  foodtech:      {market:["Urban millennials","Busy professionals","Health-conscious consumers"],moat:["Delivery network density","Restaurant relationships","Brand loyalty"],risks:["Razor-thin margins","High customer acquisition cost","Intense competition from Uber Eats, DoorDash"],gtm:["Launch in one dense urban area","Partner with 10 hero restaurants","Focus on retention over acquisition"],score:41,ref:"Munchery ($125M) couldn't crack unit economics. Food delivery is a scale game — without it, you bleed out."},
-  social:        {market:["Gen Z & millennials","Niche interest communities","Creator economy participants"],moat:["Network effects","Content flywheel","Creator monetization"],risks:["Cold start problem","Moderation at scale","Platform dependency (iOS/Android)"],gtm:["Seed with 100 passionate early users","Build in public, document the journey","Invite-only launch for exclusivity"],score:45,ref:"Vine died because it didn't pay creators. Yik Yak ($73.5M) was killed by moderation failure. Google+ couldn't beat network effects."},
-  hardware:      {market:["Early tech adopters","Enterprise buyers","Consumer electronics enthusiasts"],moat:["Manufacturing relationships","Patent portfolio","Brand premium"],risks:["Capital intensity of manufacturing","Long product cycles","Big tech entering your category"],gtm:["Crowdfunding to validate demand","Enterprise pilot programs","Direct-to-consumer with strong story"],score:38,ref:"Jawbone ($930M) and Pebble ($26M) were crushed by Apple. Hardware is brutally capital intensive."},
-  fintech:       {market:["Underbanked consumers","SMB finance teams","Crypto-native users"],moat:["Regulatory licenses","Trust & security reputation","Data network effects"],risks:["Regulatory compliance costs","Fraud & security breaches","Incumbent bank partnerships"],gtm:["Target one underserved segment","Get regulatory clarity early","Build trust through transparency"],score:66,ref:"Many FinTechs die from regulatory risk. Compliance is a moat, not a burden — build it early."},
-  default:       {market:["Early adopters in target vertical","SMBs with the core pain point","Power users who evangelize"],moat:["Proprietary data or process","Strong brand in niche","Network effects or switching costs"],risks:["No clear differentiation from incumbents","Premature scaling before product-market fit","Running out of runway before traction"],gtm:["Find 10 customers who love you, not 1000 who like you","Build in public to attract early community","Focus on one channel until it saturates"],score:55,ref:"Most startups fail from premature scaling (WeWork), wrong market timing (Quibi), or solving problems nobody has (Juicero)."}
+  marketplace:{market:["Buyers with a recurring need","Sellers who are underserved by existing platforms","Power users who bridge both sides"],moat:["Liquidity network effects","Supplier lock-in through tools & data","Trust & review systems"],risks:["Cold start problem — chicken & egg","Race to the bottom on fees","Disintermediation once trust is built"],gtm:["Seed supply side first with guaranteed income","Launch in one city or niche before expanding","Use content marketing to attract organic demand"],score:72,ref:"Homejoy ($38M raised) failed because customers bypassed the platform after first booking. Build lock-in from day one."},
+  saas:{market:["SMBs spending 10+ hours/week on the problem","Teams of 5–50 with budget but no IT dept","Power users who will champion internally"],moat:["Data lock-in & switching costs","Workflow integrations","Product-led growth flywheel"],risks:["Feature parity with incumbents","Long enterprise sales cycles","Churn if onboarding is poor"],gtm:["Free tier to drive PLG adoption","Target one vertical deeply before going horizontal","Build integrations with tools your users already use"],score:78,ref:"Many SaaS startups die from building features nobody asked for. Talk to 50 customers before writing a line of code."},
+  subscription:{market:["Enthusiasts who over-index on the category","Gift buyers looking for curated experiences","Convenience-seekers with disposable income"],moat:["Curation expertise & brand","Supplier relationships & exclusives","Community & identity"],risks:["High churn after initial excitement","Unit economics break at scale","Subscription fatigue"],gtm:["Launch with a waitlist to create scarcity","Partner with influencers in the niche","Nail the unboxing experience for social sharing"],score:61,ref:"Birchbox pioneered beauty boxes but lost to copycats. Defensibility requires more than curation — build community."},
+  foodtech:{market:["Urban millennials with disposable income","Health-conscious consumers","Time-poor professionals"],moat:["Proprietary recipes or sourcing","Delivery logistics network","Brand & lifestyle identity"],risks:["Razor-thin margins on delivery","Regulatory complexity","Customer acquisition costs vs LTV"],gtm:["Start with a ghost kitchen to test demand","Partner with existing delivery platforms first","Build a cult brand before scaling ops"],score:58,ref:"Sprig ($56.7M) and Munchery ($125M) both burned cash on logistics. Prove unit economics before scaling delivery."},
+  social:{market:["Creators looking for better monetization","Niche communities underserved by big platforms","Gen Z users seeking authenticity"],moat:["Network effects (hardest to build, hardest to break)","Creator lock-in through earnings","Unique content format"],risks:["Cold start — empty network is worthless","Platform dependency for distribution","Monetization vs user experience tension"],gtm:["Seed with 100 high-quality creators before launch","Use invite-only to create exclusivity","Build tools creators love before building audience features"],score:65,ref:"Path ($40M) had great design but no network. Clubhouse peaked fast and faded. Timing and retention are everything."},
+  hardware:{market:["Early adopters willing to pay premium","Enthusiasts who will evangelize","Enterprise buyers with clear ROI"],moat:["Manufacturing relationships & IP","Software ecosystem around hardware","Brand premium (Apple effect)"],risks:["Capital intensity & long lead times","Supply chain fragility","Software commoditizes hardware value"],gtm:["Crowdfund to validate demand and fund production","Build software experience before hardware ships","Target one use case obsessively"],score:52,ref:"Jawbone ($900M) and Pebble ($26M) were crushed by Apple. Hardware is brutally capital intensive."},
+  fintech:{market:["Underbanked consumers","SMB finance teams","Crypto-native users"],moat:["Regulatory licenses","Trust & security reputation","Data network effects"],risks:["Regulatory compliance costs","Fraud & security breaches","Incumbent bank partnerships"],gtm:["Target one underserved segment","Get regulatory clarity early","Build trust through transparency"],score:66,ref:"Many FinTechs die from regulatory risk. Compliance is a moat, not a burden — build it early."},
+  default:{market:["Early adopters in target vertical","SMBs with the core pain point","Power users who evangelize"],moat:["Proprietary data or process","Strong brand in niche","Network effects or switching costs"],risks:["No clear differentiation from incumbents","Premature scaling before product-market fit","Running out of runway before traction"],gtm:["Find 10 customers who love you, not 1000 who like you","Build in public to attract early community","Focus on one channel until it saturates"],score:55,ref:"Most startups fail from premature scaling (WeWork), wrong market timing (Quibi), or solving problems nobody has (Juicero)."}
 };
 
 function detectCategory(input){
-  const t = input.toLowerCase();
-  if(/marketplace|connect|platform|match|peer|p2p/.test(t)) return 'marketplace';
-  if(/saas|software|tool|dashboard|b2b|enterprise|productivity/.test(t)) return 'saas';
-  if(/subscription|box|monthly|recurring|membership/.test(t)) return 'subscription';
-  if(/food|meal|restaurant|delivery|chef|cook|eat/.test(t)) return 'foodtech';
-  if(/social|community|network|share|post|follow|creator/.test(t)) return 'social';
-  if(/device|hardware|wearable|gadget|iot|sensor|physical/.test(t)) return 'hardware';
-  if(/finance|payment|bank|invest|crypto|money|fintech/.test(t)) return 'fintech';
-  return 'default';
+  const t=input.toLowerCase();
+  if(/marketplace|connect|platform|match|peer|p2p/.test(t))return'marketplace';
+  if(/saas|software|tool|dashboard|b2b|enterprise|productivity/.test(t))return'saas';
+  if(/subscription|box|monthly|recurring|membership/.test(t))return'subscription';
+  if(/food|meal|restaurant|delivery|chef|cook|eat/.test(t))return'foodtech';
+  if(/social|community|network|share|post|follow|creator/.test(t))return'social';
+  if(/device|hardware|wearable|gadget|iot|sensor|physical/.test(t))return'hardware';
+  if(/finance|payment|bank|invest|crypto|money|fintech/.test(t))return'fintech';
+  return'default';
 }
 
 function runStrategyLens(){
-  const input = document.getElementById('strategyInput').value.trim();
-  if(!input) return;
-  const cat = detectCategory(input);
-  const data = STRATEGY_DB[cat];
-  const result = document.getElementById('strategyResult');
+  const input=document.getElementById('strategyInput').value.trim();
+  if(!input)return;
+  const cat=detectCategory(input);
+  const data=STRATEGY_DB[cat];
+  const result=document.getElementById('strategyResult');
   result.classList.remove('show');
   setTimeout(()=>{
-    document.getElementById('s-market-title').textContent = cat.charAt(0).toUpperCase()+cat.slice(1)+' Play';
-    document.getElementById('s-market-list').innerHTML = data.market.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-moat-title').textContent = 'Build Your Moat';
-    document.getElementById('s-moat-list').innerHTML = data.moat.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-risks-title').textContent = 'Watch Out For';
-    document.getElementById('s-risks-list').innerHTML = data.risks.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-gtm-title').textContent = 'Launch Strategy';
-    document.getElementById('s-gtm-list').innerHTML = data.gtm.map(i=>`<li>${i}</li>`).join('');
-    document.getElementById('s-graveyard-ref').innerHTML = `<strong>// ☠ Graveyard Warning</strong>${data.ref}`;
-    document.getElementById('scoreNum').textContent = data.score+'/100';
-    document.getElementById('scoreFill').style.width = '0%';
+    document.getElementById('s-market-title').textContent=cat.charAt(0).toUpperCase()+cat.slice(1)+' Play';
+    document.getElementById('s-market-list').innerHTML=data.market.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('s-moat-title').textContent='Build Your Moat';
+    document.getElementById('s-moat-list').innerHTML=data.moat.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('s-risks-title').textContent='Watch Out For';
+    document.getElementById('s-risks-list').innerHTML=data.risks.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('s-gtm-title').textContent='Launch Strategy';
+    document.getElementById('s-gtm-list').innerHTML=data.gtm.map(i=>`<li>${i}</li>`).join('');
+    document.getElementById('s-graveyard-ref').innerHTML=`<strong>// ☠ Graveyard Warning</strong>${data.ref}`;
+    document.getElementById('scoreNum').textContent=data.score+'/100';
+    document.getElementById('scoreFill').style.width='0%';
     result.classList.add('show');
-    setTimeout(()=>{ document.getElementById('scoreFill').style.width = data.score+'%'; },100);
+    setTimeout(()=>{document.getElementById('scoreFill').style.width=data.score+'%';},100);
   },100);
 }
 
 function sendStrategyReport(){
-  const email = document.getElementById('strategyEmail').value.trim();
-  const note = document.getElementById('strategyEmailNote');
-  if(!email || !email.includes('@')){
-    note.style.color='var(--accent2)';
-    note.textContent='// Please enter a valid email address';
-    return;
-  }
-  // Submit via Formspree
-  const input = document.getElementById('strategyInput').value.trim();
-  const cat = detectCategory(input);
-  const data = STRATEGY_DB[cat];
-  fetch('https://formspree.io/f/mpqkddlz', {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({
-      email: email,
-      _subject: 'BizLens Strategy Report Request',
-      idea: input,
-      category: cat,
-      score: data.score+'/100',
-      _replyto: email
-    })
-  }).then(()=>{
-    note.style.color='var(--success)';
-    note.textContent='✓ Report sent! Check your inbox shortly.';
-  }).catch(()=>{
-    note.style.color='var(--success)';
-    note.textContent='✓ Request received! We\'ll be in touch.';
-  });
+  const email=document.getElementById('strategyEmail').value.trim();
+  const note=document.getElementById('strategyEmailNote');
+  if(!email||!email.includes('@')){note.style.color='var(--accent2)';note.textContent='// Please enter a valid email address';return;}
+  const input=document.getElementById('strategyInput').value.trim();
+  const cat=detectCategory(input);
+  const data=STRATEGY_DB[cat];
+  fetch('https://formspree.io/f/mpqkddlz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,_subject:'BizLens Strategy Report Request',idea:input,category:cat,score:data.score+'/100'})})
+  .then(()=>{note.style.color='var(--success)';note.textContent='✓ Report sent! Check your inbox shortly.';})
+  .catch(()=>{note.style.color='var(--success)';note.textContent='✓ Request received! We\'ll be in touch.';});
 }
 
 function handleSubscribe(e){
   e.preventDefault();
-  const form = e.target;
-  const email = document.getElementById('subscribeEmail').value.trim();
-  fetch(form.action, {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body: JSON.stringify({email: email, _subject:'New BizLens Subscriber'})
-  }).then(r=>{
-    document.getElementById('subscribeSuccess').style.display='block';
-    form.reset();
-  }).catch(()=>{
-    document.getElementById('subscribeSuccess').style.display='block';
-    form.reset();
-  });
+  const email=document.getElementById('subscribeEmail').value.trim();
+  fetch('https://formspree.io/f/mpqkddlz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,_subject:'New BizLens Subscriber'})})
+  .then(()=>{document.getElementById('subscribeSuccess').style.display='block';e.target.reset();})
+  .catch(()=>{document.getElementById('subscribeSuccess').style.display='block';e.target.reset();});
 }
 
-// ─── MOBILE MENU ─────────────────────────────────────────────────
 function toggleMobileMenu(){
-  const menu = document.getElementById('mobileMenu');
-  const btn = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
 }
 function closeMobileMenu(){
   document.getElementById('mobileMenu').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
 }
 
-// ─── HERO + ANIMATIONS ────────────────────────────────────────────
 function goAnalyze(){
   const v=document.getElementById('heroInput').value.trim();
-  if(v) sessionStorage.setItem('bizlens_product',v);
+  if(v)sessionStorage.setItem('bizlens_product',v);
   window.location.href='analyze.html';
 }
 document.getElementById('heroInput').addEventListener('keydown',e=>{if(e.key==='Enter')goAnalyze()});
 document.getElementById('strategyInput').addEventListener('keydown',e=>{if(e.key==='Enter')runStrategyLens()});
 
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      e.target.style.animation=`fadeUp 0.5s ${i*.07}s ease both`;
-      observer.unobserve(e.target);
-    }
-  });
-},{threshold:.1});
+const observer=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){e.target.style.animation=`fadeUp 0.5s ${i*.07}s ease both`;observer.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.feature,.step').forEach(el=>observer.observe(el));
 </script>
 </body>
