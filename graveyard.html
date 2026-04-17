@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Graveyard — BizLens</title>
+  <meta name="description" content="Real startup failures, real lessons. Study the companies that burned billions so you don't repeat their mistakes.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☠</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0a0a08;--surface:#111110;--border:#1e1e1c;--accent:#e8ff47;--accent2:#ff6b35;--accent3:#47b8ff;--text:#e8e6e0;--muted:#5a5850;--success:#4dff91}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--border);background:rgba(10,10,8,.92);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:4px;color:var(--accent);text-decoration:none}
+    .nav-links{display:flex;gap:24px;align-items:center}
+    .nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-links a.active{color:var(--accent2)}
+    .nav-cta{background:var(--accent)!important;color:#0a0a08!important;padding:8px 20px!important;font-weight:600!important}
+    .nav-cta:hover{background:#fff!important}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:200}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);transition:all .3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(10,10,8,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:150;flex-direction:column;padding:20px 24px;gap:0}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:14px 0;border-bottom:1px solid var(--border);display:block;transition:color .2s}
+    .mobile-menu a:hover{color:var(--text)}
+    .mobile-menu .mobile-cta{color:var(--accent)!important;font-weight:600}
+    .page-hero{padding:120px 48px 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+    .page-hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.3;pointer-events:none}
+    .page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+    .page-hero-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px}
+    .page-hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,130px);line-height:.88;letter-spacing:2px;margin-bottom:20px}
+    .page-hero-title span{color:var(--accent2)}
+    .page-hero-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:48px}
+    .stats-row{display:flex;gap:0;flex-wrap:wrap;border:1px solid var(--border);background:var(--border)}
+    .stat-box{flex:1;min-width:140px;background:var(--surface);padding:28px 32px}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--accent2);line-height:1}
+    .stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+    .controls{max-width:1200px;margin:0 auto;padding:32px 48px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border)}
+    .search-input{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:12px 18px;outline:none;flex:1;min-width:220px;max-width:380px;transition:border-color .2s}
+    .search-input:focus{border-color:var(--accent2)}
+    .search-input::placeholder{color:var(--muted)}
+    .filter-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;background:none;border:1px solid var(--border);color:var(--muted);padding:10px 16px;cursor:pointer;transition:all .2s}
+    .filter-btn:hover,.filter-btn.active{border-color:var(--accent2);color:var(--accent2);background:rgba(255,107,53,.06)}
+    .results-bar{max-width:1200px;margin:0 auto;padding:16px 48px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;border-bottom:1px solid var(--border)}
+    .graveyard-grid{max-width:1200px;margin:0 auto;padding:0 48px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--border);margin-top:1px}
+    .grave-card{background:var(--bg);padding:32px 28px;transition:background .2s;position:relative;overflow:hidden}
+    .grave-card:hover{background:var(--surface)}
+    .grave-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent2);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .grave-card:hover::before{transform:scaleX(1)}
+    .grave-skull{font-size:18px;margin-bottom:10px;opacity:.4}
+    .grave-name{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--text);margin-bottom:10px;line-height:1}
+    .grave-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+    .grave-industry{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent3);border:1px solid rgba(71,184,255,.2);padding:3px 8px}
+    .grave-year{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent2)}
+    .grave-capital{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+    .grave-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px}
+    .grave-lesson{font-size:12px;color:var(--text);line-height:1.6;padding:12px 14px;background:rgba(232,255,71,.04);border-left:2px solid var(--accent);margin-bottom:12px}
+    .grave-lesson strong{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:4px;text-transform:uppercase}
+    .grave-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .grave-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);border:1px solid var(--border);padding:3px 8px}
+    .grave-pattern{border-color:rgba(255,107,53,.3)!important;color:var(--accent2)!important}
+    .no-results{padding:80px 48px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:2px;text-align:center;background:var(--bg);grid-column:1/-1}
+    footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent)}
+    .footer-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
+    .footer-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+    .footer-back:hover{color:var(--accent)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.hamburger{display:flex}.page-hero{padding:90px 20px 40px}.controls{padding:20px}.results-bar{padding:12px 20px}.graveyard-grid{padding:0 0 60px;grid-template-columns:1fr}footer{padding:24px 20px;flex-direction:column;text-align:center}.stat-box{padding:20px}.stat-num{font-size:36px}}
+    @media(max-width:480px){.page-hero-title{font-size:clamp(52px,14vw,80px)}.stats-row{flex-direction:column}.filter-btn{padding:8px 12px;font-size:9px}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">BizLens</a>
+  <div class="nav-links">
+    <a href="index.html#features">Features</a>
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html#strategy">Strategy Lens</a>
+    <a href="graveyard.html" class="active">☠ Graveyard</a>
+    <a href="analyze.html" class="nav-cta">Try It Free →</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#features" onclick="closeMobileMenu()">Features</a>
+  <a href="index.html#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="index.html#strategy" onclick="closeMobileMenu()">Strategy Lens</a>
+  <a href="graveyard.html" onclick="closeMobileMenu()">☠ Graveyard</a>
+  <a href="analyze.html" class="mobile-cta">Try It Free →</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-label">// Startup Graveyard</div>
+    <h1 class="page-hero-title">Real Failures.<br><span>Real Lessons.</span></h1>
+    <p class="page-hero-sub">Don't repeat history. Study the startups that burned billions so you don't have to. Every failure has a pattern. Learn it before you repeat it.</p>
+    <div class="stats-row" id="statsRow"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <input class="search-input" id="graveyardSearch" type="text" placeholder="Search startups, industries, lessons..." oninput="renderGraveyard()">
+  <button class="filter-btn active" onclick="setFilter(this,'all')">All</button>
+  <button class="filter-btn" onclick="setFilter(this,'Social')">Social</button>
+  <button class="filter-btn" onclick="setFilter(this,'Hardware')">Hardware</button>
+  <button class="filter-btn" onclick="setFilter(this,'E-Commerce')">E-Commerce</button>
+  <button class="filter-btn" onclick="setFilter(this,'FoodTech')">FoodTech</button>
+  <button class="filter-btn" onclick="setFilter(this,'Marketplace')">Marketplace</button>
+  <button class="filter-btn" onclick="setFilter(this,'FinTech')">FinTech</button>
+  <button class="filter-btn" onclick="setFilter(this,'SaaS')">SaaS</button>
+  <button class="filter-btn" onclick="setFilter(this,'HealthTech')">HealthTech</button>
+  <button class="filter-btn" onclick="setFilter(this,'Media')">Media</button>
+  <button class="filter-btn" onclick="setFilter(this,'Transport')">Transport</button>
+</div>
+
+<div class="results-bar" id="resultsBar"></div>
+<div class="graveyard-grid" id="graveyardGrid"></div>
+
+<footer>
+  <div class="footer-logo">BizLens</div>
+  <a href="index.html" class="footer-back">← Back to Home</a>
+  <div class="footer-text">© 2026 BizLens · See every product as a business</div>
+</footer>
+
+<script>
+const GRAVES = [
+  // SOCIAL
+  {name:"Vine",industry:"Social",tags:["video","creator","mobile"],capital:"$30M",year:2016,desc:"Twitter's 6-second video platform was killed after failing to monetize creators. Instagram and Snapchat filled the void instantly.",lesson:"Platforms that don't pay creators lose creators — then users. Creator monetization is not optional.",pattern:"Creator monetization failure"},
+  {name:"Google+",industry:"Social",tags:["social","network","google"],capital:"$585M",year:2019,desc:"Google's social network failed despite forced integration with Gmail and YouTube. Users never chose it voluntarily.",lesson:"You can't force network effects. Users must choose your platform, not be pushed onto it.",pattern:"Forced adoption failure"},
+  {name:"Yik Yak",industry:"Social",tags:["anonymous","mobile","campus"],capital:"$73.5M",year:2017,desc:"Anonymous location-based social app destroyed by cyberbullying. Shut down, then relaunched, then shut down again.",lesson:"Anonymity without moderation is a liability. Build safety into the product from day one.",pattern:"Moderation failure"},
+  {name:"Secret",industry:"Social",tags:["anonymous","sharing","mobile"],capital:"$35M",year:2015,desc:"Anonymous sharing app shut down by its own founder after becoming a harassment machine.",lesson:"Founders must anticipate how their product will be weaponized. Design against misuse.",pattern:"Product misuse"},
+  {name:"Friendster",industry:"Social",tags:["social","network","pioneer"],capital:"$13M",year:2011,desc:"The original social network collapsed under technical failures and slow load times just as MySpace and Facebook launched.",lesson:"Technical scalability is a product feature. Slow = dead in social.",pattern:"Technical scaling failure"},
+  {name:"MySpace",industry:"Social",tags:["social","music","network"],capital:"$580M",year:2011,desc:"Once the world's biggest social network, MySpace was killed by clutter, spam, and Facebook's clean UX.",lesson:"UX debt compounds. A messy product is an open door for a cleaner competitor.",pattern:"UX/product neglect"},
+  {name:"Peach",industry:"Social",tags:["social","mobile","messaging"],capital:"$3.5M",year:2017,desc:"Quirky social app that went viral for a week then disappeared. No retention strategy, no clear use case.",lesson:"Viral moments are not product-market fit. Retention is the only metric that matters.",pattern:"No retention strategy"},
+  {name:"Path",industry:"Social",tags:["social","mobile","privacy"],capital:"$55M",year:2018,desc:"Intimate social network capped at 150 friends. Couldn't monetize and was acquired for parts.",lesson:"Niche social networks need a clear monetization path. Privacy as a feature doesn't pay bills.",pattern:"Monetization failure"},
+  {name:"Ello",industry:"Social",tags:["social","ad-free","design"],capital:"$5.5M",year:2020,desc:"Ad-free social network that attracted designers but couldn't convert buzz into a sustainable business.",lesson:"'No ads' is a positioning statement, not a business model.",pattern:"No business model"},
+
+  // HARDWARE
+  {name:"Juicero",industry:"Hardware",tags:["IoT","food","consumer"],capital:"$120M",year:2017,desc:"$400 Wi-Fi connected juice press became a laughingstock when journalists showed the packs could be squeezed by hand.",lesson:"Technology must solve a real problem. Adding connectivity to a solved problem is not innovation.",pattern:"Solution looking for a problem"},
+  {name:"Jawbone",industry:"Hardware",tags:["wearables","fitness","consumer"],capital:"$930M",year:2017,desc:"Fitness tracker pioneer crushed by Apple Watch and Fitbit. Couldn't match their manufacturing quality or distribution.",lesson:"Hardware is brutally capital intensive. Without manufacturing excellence and distribution, you die.",pattern:"Hardware execution failure"},
+  {name:"Pebble",industry:"Hardware",tags:["smartwatch","wearables","crowdfunding"],capital:"$26M",year:2016,desc:"Beloved smartwatch brand with a passionate community, crushed when Apple Watch launched.",lesson:"Passionate early adopters don't protect you from a trillion-dollar competitor entering your market.",pattern:"Big tech competition"},
+  {name:"Segway",industry:"Hardware",tags:["transport","consumer","robotics"],capital:"$90M",year:2020,desc:"Hyped as the future of transportation, Segway never found mass-market adoption and was sold for $75M — a fraction of its valuation.",lesson:"Hype is not demand. Validate real use cases before betting the company on a vision.",pattern:"Hype without demand"},
+  {name:"Daqri",industry:"Hardware",tags:["AR","enterprise","wearables"],capital:"$275M",year:2019,desc:"Enterprise AR headset company ran out of runway before the market matured. Sold assets for pennies.",lesson:"Enterprise hardware adoption cycles are 5–10x longer than consumer. Plan your runway accordingly.",pattern:"Market timing failure"},
+  {name:"Lytro",industry:"Hardware",tags:["camera","photography","consumer"],capital:"$215M",year:2018,desc:"Light-field camera startup that created genuinely novel tech but couldn't find a mass market. Acquired by Google.",lesson:"Novel technology needs a clear, accessible use case. 'Cool' is not a market.",pattern:"No clear use case"},
+  {name:"Essential Phone",industry:"Hardware",tags:["smartphone","consumer","android"],capital:"$330M",year:2020,desc:"Andy Rubin's premium Android phone startup shut down after poor sales despite strong specs.",lesson:"Brand loyalty in smartphones is near-impossible to break. Distribution and ecosystem matter more than specs.",pattern:"Brand/distribution failure"},
+  {name:"Humane AI Pin",industry:"Hardware",tags:["AI","wearables","consumer"],capital:"$230M",year:2024,desc:"Screenless AI wearable pin received devastating reviews. Slow, unreliable, and solved no clear problem better than a phone.",lesson:"Replacing the smartphone requires 10x better experience, not just a different form factor.",pattern:"Product-market fit failure"},
+
+  // E-COMMERCE
+  {name:"Fab.com",industry:"E-Commerce",tags:["design","flash-sale","marketplace"],capital:"$336M",year:2015,desc:"Design-focused flash sale site pivoted from gay social network to e-commerce, then pivoted again and again until it ran out of cash.",lesson:"Pivoting without conviction kills companies faster than staying the wrong course.",pattern:"Pivot fatigue"},
+  {name:"Loot Crate",industry:"E-Commerce",tags:["subscription","gaming","pop-culture"],capital:"$29M",year:2019,desc:"Gaming subscription box over-expanded into too many verticals, couldn't fulfill orders, and filed for bankruptcy.",lesson:"Subscription businesses must nail fulfillment operations before scaling. Broken boxes = broken trust.",pattern:"Operational scaling failure"},
+  {name:"Fab.com",industry:"E-Commerce",tags:["design","flash-sale","marketplace"],capital:"$336M",year:2015,desc:"Design-focused flash sale site that pivoted too many times and burned through $336M chasing growth.",lesson:"Pivoting without conviction kills companies faster than staying the wrong course.",pattern:"Pivot fatigue"},
+  {name:"Diapers.com",industry:"E-Commerce",tags:["baby","subscription","CPG"],capital:"$50M",year:2017,desc:"Amazon acquired Quidsi (Diapers.com) for $545M then shut it down after undercutting its prices to force the sale.",lesson:"If Amazon is your competitor, you need a moat they can't replicate. Price is not a moat.",pattern:"Amazon competition"},
+  {name:"Gilt Groupe",industry:"E-Commerce",tags:["luxury","flash-sale","fashion"],capital:"$236M",year:2016,desc:"Luxury flash-sale pioneer sold for $250M — a fraction of its $1B peak valuation — as the flash-sale model collapsed.",lesson:"Flash-sale is a tactic, not a business model. Sustainable e-commerce needs repeat purchase loyalty.",pattern:"Business model collapse"},
+  {name:"Zulily",industry:"E-Commerce",tags:["flash-sale","kids","fashion"],capital:"$253M",year:2019,desc:"Flash-sale site for moms acquired by QVC for $2.4B, then shut down as the model became unprofitable.",lesson:"Slow shipping kills e-commerce loyalty. Speed is a feature, not a logistics detail.",pattern:"Poor customer experience"},
+  {name:"Brandless",industry:"E-Commerce",tags:["CPG","DTC","grocery"],capital:"$240M",year:2020,desc:"$3 everything DTC brand shut down after SoftBank investment. Couldn't compete with Amazon Basics and private labels.",lesson:"Price parity is not a brand. Without emotional differentiation, you're just a commodity.",pattern:"No brand differentiation"},
+
+  // FOODTECH
+  {name:"Munchery",industry:"FoodTech",tags:["meal-delivery","marketplace","B2C"],capital:"$125M",year:2019,desc:"Meal delivery startup that couldn't crack unit economics in a brutally competitive market. Shut down with no warning.",lesson:"Food delivery has razor-thin margins. Without massive scale, every order loses money.",pattern:"Unit economics failure"},
+  {name:"Sprig",industry:"FoodTech",tags:["on-demand","meal","delivery"],capital:"$56.7M",year:2017,desc:"On-demand healthy meal delivery shut down after burning through cash. Couldn't achieve the density needed for profitability.",lesson:"On-demand food requires extreme geographic density. Spreading too thin is fatal.",pattern:"Geographic density failure"},
+  {name:"Maple",industry:"FoodTech",tags:["meal-delivery","NYC","premium"],capital:"$29M",year:2017,desc:"NYC premium meal delivery backed by David Chang shut down after 2 years. Acquired by Deliveroo.",lesson:"Premium food delivery in one city is not a scalable business. Unit economics don't improve with quality.",pattern:"Scalability failure"},
+  {name:"Bento",industry:"FoodTech",tags:["meal-delivery","B2B","office"],capital:"$2M",year:2016,desc:"Office lunch delivery startup that publicly admitted to losing money on every order while trying to scale.",lesson:"Never scale a product with negative unit economics. Fix the model before growing.",pattern:"Negative unit economics"},
+  {name:"Eatsa",industry:"FoodTech",tags:["restaurant","automation","quinoa"],capital:"$15M",year:2019,desc:"Automated quinoa bowl restaurant with no human cashiers. Novelty wore off and locations closed one by one.",lesson:"Automation as a gimmick doesn't build loyalty. Customers return for food and experience, not tech.",pattern:"Novelty without retention"},
+  {name:"Kitchensurfing",industry:"FoodTech",tags:["marketplace","chef","home"],capital:"$15M",year:2016,desc:"Marketplace connecting private chefs with home diners. Pivoted multiple times before shutting down.",lesson:"High-touch service marketplaces are hard to scale. Quality control across thousands of chefs is nearly impossible.",pattern:"Quality control at scale"},
+
+  // MARKETPLACE
+  {name:"Homejoy",industry:"Marketplace",tags:["cleaning","gig-economy","on-demand"],capital:"$38M",year:2015,desc:"On-demand home cleaning startup shut down after worker misclassification lawsuits threatened to bankrupt the company.",lesson:"Regulatory risk in gig economy models is existential. Classify workers correctly from day one.",pattern:"Legal/regulatory risk"},
+  {name:"Shyp",industry:"Marketplace",tags:["logistics","shipping","on-demand"],capital:"$62M",year:2018,desc:"On-demand shipping startup underpriced its service to acquire users, then couldn't raise prices without losing them.",lesson:"Underpricing to acquire users is a trap. Your cost structure must improve with scale, not worsen.",pattern:"Pricing strategy failure"},
+  {name:"Exec",industry:"Marketplace",tags:["cleaning","on-demand","gig"],capital:"$2.6M",year:2014,desc:"On-demand cleaning and errand service that pivoted to just cleaning, then shut down. Acquired by Handy.",lesson:"On-demand services need extreme operational efficiency. Broad scope kills focus.",pattern:"Operational focus failure"},
+  {name:"Beepi",industry:"Marketplace",tags:["cars","used","peer-to-peer"],capital:"$149M",year:2017,desc:"Peer-to-peer used car marketplace that burned through cash on operations and couldn't achieve profitability.",lesson:"High-value physical goods marketplaces require massive operational infrastructure. Capital intensity is brutal.",pattern:"Operational complexity"},
+  {name:"Kozmo.com",industry:"Marketplace",tags:["delivery","1-hour","dot-com"],capital:"$280M",year:2001,desc:"1-hour delivery of books, DVDs, and snacks in the dot-com era. Burned cash on free delivery with no minimum order.",lesson:"Free delivery with no minimum order is not a business model. Unit economics matter from day one.",pattern:"No unit economics"},
+
+  // FINTECH
+  {name:"Wirecard",industry:"FinTech",tags:["payments","fraud","europe"],capital:"$3.5B",year:2020,desc:"German payments giant collapsed after $2.1B in cash was found to be missing. One of Europe's biggest accounting frauds.",lesson:"Rapid growth that can't be explained by fundamentals is a red flag. Audit your partners.",pattern:"Fraud/accounting scandal"},
+  {name:"Celsius Network",industry:"FinTech",tags:["crypto","lending","DeFi"],capital:"$864M",year:2022,desc:"Crypto lending platform froze withdrawals and filed for bankruptcy, leaving 1.7M users unable to access funds.",lesson:"Yield that seems too good to be true is too good to be true. Crypto leverage is existential risk.",pattern:"Crypto leverage collapse"},
+  {name:"FTX",industry:"FinTech",tags:["crypto","exchange","fraud"],capital:"$1.8B",year:2022,desc:"Sam Bankman-Fried's crypto exchange collapsed after misusing $8B in customer funds. One of the largest financial frauds in history.",lesson:"Charismatic founders with complex structures and no oversight are a massive red flag.",pattern:"Fraud"},
+  {name:"LendUp",industry:"FinTech",tags:["lending","payday","consumer"],capital:"$364M",year:2021,desc:"Payday loan alternative shut down after regulatory actions for failing to deliver promised benefits to borrowers.",lesson:"Regulatory compliance in lending is not optional. Build compliance into the product, not around it.",pattern:"Regulatory failure"},
+  {name:"Simple Bank",industry:"FinTech",tags:["neobank","consumer","banking"],capital:"$13.3M",year:2021,desc:"Pioneer neobank acquired by BBVA for $117M, then shut down as BBVA exited the US market.",lesson:"Being acquired doesn't guarantee survival. Strategic alignment with your acquirer is critical.",pattern:"Acquirer strategy mismatch"},
+
+  // SAAS
+  {name:"Quibi",industry:"Media",tags:["streaming","mobile","short-form"],capital:"$1.75B",year:2020,desc:"Mobile-only short-form video platform shut down after 6 months. Raised $1.75B and couldn't find an audience.",lesson:"Product-market fit cannot be bought. Quibi solved a problem nobody had.",pattern:"No product-market fit"},
+  {name:"Theranos",industry:"HealthTech",tags:["biotech","blood-testing","fraud"],capital:"$900M",year:2018,desc:"Blood-testing startup that claimed to run hundreds of tests from a single drop of blood. The technology never worked.",lesson:"In regulated industries, fake it till you make it is a criminal strategy. Science cannot be faked.",pattern:"Fraud"},
+  {name:"WeWork",industry:"SaaS",tags:["real-estate","coworking","B2B"],capital:"$11B",year:2019,desc:"Co-working giant imploded before IPO due to governance chaos, a cult-like CEO, and catastrophic unit economics.",lesson:"Growth at all costs without unit economics is a time bomb. Culture and governance are not soft issues.",pattern:"Bad unit economics + governance"},
+  {name:"Rdio",industry:"Media",tags:["music","streaming","subscription"],capital:"$17.5M",year:2015,desc:"Music streaming pioneer with a better product than Spotify, killed by inferior distribution and marketing.",lesson:"Distribution and marketing matter as much as product quality. The best product doesn't always win.",pattern:"Out-distributed"},
+  {name:"Solyndra",industry:"CleanTech",tags:["solar","hardware","government"],capital:"$1.1B",year:2011,desc:"Solar panel manufacturer collapsed when Chinese competitors undercut prices by 75%, making their technology uncompetitive.",lesson:"Government subsidies can mask fundamental cost structure problems. Subsidies are not a moat.",pattern:"Cost structure failure"},
+  {name:"Quirky",industry:"Marketplace",tags:["invention","crowdsourcing","hardware"],capital:"$185M",year:2015,desc:"Crowdsourced invention platform that tried to productize too many ideas at once and collapsed under operational complexity.",lesson:"Crowdsourcing ideas is easy. Manufacturing and distributing physical products is brutally hard.",pattern:"Operational complexity"},
+
+  // HEALTHTECH
+  {name:"Theranos",industry:"HealthTech",tags:["biotech","diagnostics","fraud"],capital:"$900M",year:2018,desc:"Elizabeth Holmes' blood-testing startup was built on fabricated science. The Edison machine never worked as claimed.",lesson:"Healthcare fraud kills people. Regulatory shortcuts in health are not shortcuts — they're crimes.",pattern:"Fraud"},
+  {name:"Outcome Health",industry:"HealthTech",tags:["health","advertising","SaaS"],capital:"$487M",year:2017,desc:"Health media company accused of inflating metrics and defrauding advertisers. Raised $487M before the scandal broke.",lesson:"Metrics that can't be independently verified are a fraud risk. Build transparent reporting from day one.",pattern:"Metrics fraud"},
+  {name:"Katerra",industry:"HealthTech",tags:["construction","SaaS","real-estate"],capital:"$1.5B",year:2021,desc:"SoftBank-backed construction tech startup that tried to vertically integrate the entire building supply chain. Collapsed under complexity.",lesson:"Vertical integration sounds powerful but requires mastering multiple industries simultaneously. Scope kills.",pattern:"Over-vertical integration"},
+  {name:"Zirtual",industry:"SaaS",tags:["virtual-assistant","B2B","marketplace"],capital:"$5.5M",year:2015,desc:"Virtual assistant marketplace shut down overnight, leaving 400 employees without jobs and clients without service.",lesson:"Scaling headcount before revenue is fatal. Never hire ahead of your cash flow.",pattern:"Premature scaling"},
+
+  // TRANSPORT
+  {name:"Bird",industry:"Transport",tags:["scooters","micro-mobility","urban"],capital:"$776M",year:2023,desc:"E-scooter pioneer filed for bankruptcy after burning through cash on expansion, vandalism, and regulatory battles.",lesson:"Micro-mobility unit economics are brutal. Scooters get stolen, broken, and banned. Model for that.",pattern:"Unit economics + regulation"},
+  {name:"Convoy",industry:"Transport",tags:["trucking","marketplace","logistics"],capital:"$900M",year:2023,desc:"Digital freight marketplace shut down despite $900M raised. Couldn't achieve profitability in a thin-margin industry.",lesson:"Digitizing a thin-margin industry doesn't automatically improve margins. The economics must change, not just the interface.",pattern:"Thin margin industry"},
+  {name:"Chariot",industry:"Transport",tags:["commuter","shuttle","Ford"],capital:"$65M",year:2019,desc:"Ford-backed commuter shuttle service shut down after failing to achieve the ridership density needed for profitability.",lesson:"Fixed-route transit requires extreme density. Without it, every route loses money.",pattern:"Density failure"},
+  {name:"Via Transportation",industry:"Transport",tags:["rideshare","transit","B2B"],capital:"$800M",year:2024,desc:"Shared ride platform pivoted multiple times but struggled to find sustainable unit economics in public transit partnerships.",lesson:"B2G (business-to-government) sales cycles are 3–5x longer than B2B. Plan your runway accordingly.",pattern:"B2G sales cycle mismatch"},
+
+  // MEDIA
+  {name:"Vine",industry:"Media",tags:["video","creator","short-form"],capital:"$30M",year:2016,desc:"Twitter's 6-second video app was the original short-form video platform. Killed by lack of creator monetization.",lesson:"Creator platforms live and die by creator economics. Pay your creators or lose them.",pattern:"Creator monetization failure"},
+  {name:"Periscope",industry:"Media",tags:["live-video","streaming","Twitter"],capital:"$100M",year:2021,desc:"Live video streaming app acquired by Twitter for $100M, then shut down as the format was absorbed into Twitter itself.",lesson:"Standalone apps acquired by platforms often get cannibalized. Acquisition is not always survival.",pattern:"Platform cannibalization"},
+  {name:"Mixer",industry:"Media",tags:["gaming","streaming","Microsoft"],capital:"$1B+",year:2020,desc:"Microsoft's Twitch competitor shut down after poaching Ninja and Shroud for hundreds of millions. Viewers didn't follow.",lesson:"Paying for creators doesn't guarantee their audience follows. Community is not transferable.",pattern:"Audience portability failure"},
+  {name:"Quibi",industry:"Media",tags:["streaming","mobile","premium"],capital:"$1.75B",year:2020,desc:"Jeffrey Katzenberg's mobile streaming platform raised $1.75B and shut down in 6 months. Nobody wanted 10-minute shows.",lesson:"Format innovation must match real user behavior. People watch short videos on social, not premium apps.",pattern:"Format mismatch"},
+  {name:"Rdio",industry:"Media",tags:["music","streaming","subscription"],capital:"$17.5M",year:2015,desc:"Better product than Spotify, worse marketing and distribution. Acquired by Pandora for $75M and shut down.",lesson:"In winner-take-all markets, distribution beats product. Get to scale or get acquired.",pattern:"Distribution failure"},
+];
+
+// Remove duplicates by name
+const seen = new Set();
+const GRAVEYARD = GRAVES.filter(g => {
+  if(seen.has(g.name+g.pattern)) return false;
+  seen.add(g.name+g.pattern);
+  return true;
+});
+
+let currentFilter = 'all';
+
+function setFilter(btn, filter){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = filter;
+  renderGraveyard();
+}
+
+function renderStats(){
+  const totalCapital = GRAVEYARD.reduce((sum,g)=>{
+    const clean = g.capital.replace(/[$MB+,]/g,'');
+    const n = parseFloat(clean) || 0;
+    return sum + (g.capital.includes('B') ? n*1000 : n);
+  },0);
+  const industries = [...new Set(GRAVEYARD.map(g=>g.industry))].length;
+  const patterns = [...new Set(GRAVEYARD.map(g=>g.pattern))].length;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-box"><div class="stat-num">${GRAVEYARD.length}</div><div class="stat-label">Startups Buried</div></div>
+    <div class="stat-box"><div class="stat-num">$${(totalCapital/1000).toFixed(1)}B</div><div class="stat-label">Capital Burned</div></div>
+    <div class="stat-box"><div class="stat-num">${industries}</div><div class="stat-label">Industries</div></div>
+    <div class="stat-box"><div class="stat-num">${patterns}</div><div class="stat-label">Failure Patterns</div></div>
+  `;
+}
+
+function renderGraveyard(){
+  const q = (document.getElementById('graveyardSearch').value||'').toLowerCase();
+  const data = GRAVEYARD.filter(g=>{
+    const matchFilter = currentFilter==='all' || g.industry===currentFilter || g.tags.includes(currentFilter.toLowerCase());
+    const matchSearch = !q ||
+      g.name.toLowerCase().includes(q) ||
+      g.industry.toLowerCase().includes(q) ||
+      g.desc.toLowerCase().includes(q) ||
+      g.lesson.toLowerCase().includes(q) ||
+      g.pattern.toLowerCase().includes(q) ||
+      g.tags.some(t=>t.includes(q));
+    return matchFilter && matchSearch;
+  });
+
+  document.getElementById('resultsBar').textContent = `// Showing ${data.length} of ${GRAVEYARD.length} startups`;
+
+  const grid = document.getElementById('graveyardGrid');
+  if(!data.length){
+    grid.innerHTML = '<div class="no-results">// No startups found matching your search</div>';
+    return;
+  }
+  grid.innerHTML = data.map((g,i)=>`
+    <div class="grave-card" style="animation:fadeUp .35s ${Math.min(i*.03,0.5)}s ease both">
+      <div class="grave-skull">☠</div>
+      <div class="grave-name">${g.name}</div>
+      <div class="grave-meta">
+        <span class="grave-industry">${g.industry}</span>
+        <span class="grave-year">☠ ${g.year}</span>
+        <span class="grave-capital">${g.capital} burned</span>
+      </div>
+      <div class="grave-desc">${g.desc}</div>
+      <div class="grave-lesson"><strong>Key Lesson</strong>${g.lesson}</div>
+      <div class="grave-tags">
+        ${g.tags.map(t=>`<span class="grave-tag">${t}</span>`).join('')}
+        <span class="grave-tag grave-pattern">${g.pattern}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleMobileMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+renderStats();
+renderGraveyard();
+function handleSubscribe(e){
+  e.preventDefault();
+  const form = document.getElementById('subscribeForm');
+  const msg = document.getElementById('subscribeMsg');
+  const data = new FormData(form);
+  msg.style.color = 'var(--muted)';
+  msg.textContent = '// Subscribing...';
+  fetch('https://formspree.io/f/mpqkddlz', {method:'POST', body:data, headers:{'Accept':'application/json'}})
+    .then(r => {
+      if(r.ok){ msg.style.color='var(--success)'; msg.textContent='// ✓ Subscribed! Weekly failures incoming.'; form.reset(); }
+      else { msg.style.color='var(--accent2)'; msg.textContent='// Error. Try again.'; }
+    })
+    .catch(()=>{ msg.style.color='var(--accent2)'; msg.textContent='// Network error. Try again.'; });
+}
+</script>
+</body>
+</html>
