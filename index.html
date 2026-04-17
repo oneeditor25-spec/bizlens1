@@ -25,7 +25,7 @@
   {"@context":"https://schema.org","@type":"WebApplication","name":"BizLens","description":"Business and marketing intelligence tool. Analyze any product or brand instantly.","url":"https://www.bizlens.in","applicationCategory":"BusinessApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
   </script>
   <style>
-    :root{--bg:#0a0a08;--surface:#111110;--border:#1e1e1c;--accent:#e8ff47;--accent2:#ff6b35;--accent3:#47b8ff;--text:#e8e6e0;--muted:#5a5850;--success:#4dff91}
+    :root{--bg:#0a0a08;--surface:#11110;--border:#1e1e1c;--accent:#e8ff47;--accent2:#ff6b35;--accent3:#47b8ff;--text:#e8e6e0;--muted:#5a5850;--success:#4dff91}
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
@@ -82,8 +82,61 @@
     .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--accent)}
     .footer-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px}
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    @media(max-width:900px){.features-grid,.steps{grid-template-columns:1fr 1fr}nav{padding:0 20px}.section{padding:60px 20px}footer{padding:24px 20px}.cta-section{padding:60px 24px}}
-    @media(max-width:600px){.features-grid,.steps{grid-template-columns:1fr}.nav-links{display:none}.hero-input-group{flex-direction:column}.hero-input{border-right:1px solid rgba(232,255,71,.3)}.hero-btn{padding:16px}}
+
+    /* GRAVEYARD TOGGLE */
+    .graveyard-toggle-wrap{display:flex;align-items:center;gap:10px;margin-left:8px}
+    .graveyard-toggle-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    .toggle-switch{position:relative;width:44px;height:24px;cursor:pointer;flex-shrink:0}
+    .toggle-switch input{opacity:0;width:0;height:0;position:absolute}
+    .toggle-track{position:absolute;inset:0;background:#1e1e1c;border:1px solid #333;border-radius:12px;transition:all .3s}
+    .toggle-thumb{position:absolute;top:3px;left:3px;width:16px;height:16px;background:var(--muted);border-radius:50%;transition:all .3s}
+    .toggle-switch input:checked~.toggle-track{background:rgba(232,255,71,.15);border-color:var(--accent)}
+    .toggle-switch input:checked~.toggle-thumb{left:23px;background:var(--accent)}
+
+    /* GRAVEYARD PANEL */
+    #graveyardPanel{display:none;background:var(--bg);border-top:1px solid var(--border)}
+    #graveyardPanel.open{display:block}
+    .graveyard-header{background:#0d0d0b;border-bottom:1px solid var(--border);padding:48px 48px 32px;position:relative;overflow:hidden}
+    .graveyard-header::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,71,71,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,71,71,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+    .graveyard-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#ff4747;margin-bottom:12px;position:relative;z-index:1}
+    .graveyard-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,96px);line-height:.9;color:#e8e6e0;position:relative;z-index:1}
+    .graveyard-title span{color:#ff4747}
+    .graveyard-subtitle{font-size:14px;color:var(--muted);margin-top:16px;max-width:560px;line-height:1.6;position:relative;z-index:1}
+    .graveyard-stats{display:flex;gap:2px;margin-top:32px;position:relative;z-index:1;flex-wrap:wrap}
+    .g-stat{background:#111;border:1px solid var(--border);padding:16px 24px;flex:1;min-width:120px}
+    .g-stat-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#ff4747;line-height:1}
+    .g-stat-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+    .graveyard-controls{padding:24px 48px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#0a0a08}
+    .g-filter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-right:4px}
+    .g-filter-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+    .g-filter-btn:hover,.g-filter-btn.active{border-color:#ff4747;color:#ff4747;background:rgba(255,71,71,.06)}
+    .g-search{flex:1;min-width:200px;max-width:320px;background:#111;border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:8px 14px;outline:none;margin-left:auto;letter-spacing:1px}
+    .g-search:focus{border-color:#ff4747}
+    .g-search::placeholder{color:var(--muted)}
+    .graveyard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);padding:0}
+    .grave-card{background:var(--bg);padding:28px;position:relative;overflow:hidden;transition:background .25s;cursor:default;animation:fadeUp .4s ease both}
+    .grave-card:hover{background:#0f0f0d}
+    .grave-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:#ff4747;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .grave-card:hover::before{transform:scaleX(1)}
+    .grave-skull{font-size:20px;margin-bottom:12px;opacity:.6}
+    .grave-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:#e8e6e0;margin-bottom:4px;line-height:1}
+    .grave-industry{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#ff4747;margin-bottom:12px}
+    .grave-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+    .grave-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+    .grave-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+    .grave-tag-red{background:rgba(255,71,71,.1);color:#ff4747;border:1px solid rgba(255,71,71,.2)}
+    .grave-tag-gray{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--border)}
+    .grave-tag-orange{background:rgba(255,107,53,.1);color:var(--accent2);border:1px solid rgba(255,107,53,.2)}
+    .grave-lesson{background:rgba(255,71,71,.04);border-left:2px solid #ff4747;padding:10px 14px;font-size:12px;color:#c8c6c0;line-height:1.6;font-style:italic}
+    .grave-lesson-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#ff4747;margin-bottom:4px}
+    .graveyard-footer-bar{padding:24px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:#0a0a08}
+    .g-source{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px}
+    .g-source a{color:#ff4747;text-decoration:none}
+    .g-source a:hover{text-decoration:underline}
+    .no-results{padding:60px;text-align:center;font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;grid-column:1/-1}
+
+    @media(max-width:900px){.features-grid,.steps{grid-template-columns:1fr 1fr}nav{padding:0 20px}.section{padding:60px 20px}footer{padding:24px 20px}.cta-section{padding:60px 24px}.graveyard-grid{grid-template-columns:1fr 1fr}.graveyard-header,.graveyard-controls,.graveyard-footer-bar{padding-left:20px;padding-right:20px}}
+    @media(max-width:600px){.features-grid,.steps{grid-template-columns:1fr}.nav-links{display:none}.hero-input-group{flex-direction:column}.hero-input{border-right:1px solid rgba(232,255,71,.3)}.hero-btn{padding:16px}.graveyard-grid{grid-template-columns:1fr}.graveyard-toggle-label{display:none}}
   </style>
 </head>
 <body>
@@ -92,9 +145,48 @@
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#how">How It Works</a>
+    <div class="graveyard-toggle-wrap">
+      <span class="graveyard-toggle-label">💀 Graveyard</span>
+      <label class="toggle-switch" title="Toggle Startup Graveyard">
+        <input type="checkbox" id="graveyardToggle" onchange="toggleGraveyard(this.checked)">
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+    </div>
     <a href="analyze.html" class="nav-cta">Try It Free →</a>
   </div>
 </nav>
+
+<!-- STARTUP GRAVEYARD PANEL -->
+<div id="graveyardPanel">
+  <div class="graveyard-header">
+    <div class="graveyard-eyebrow">// Startup Graveyard · Failure Intelligence</div>
+    <div class="graveyard-title">Dead<br>Startups.<br><span>Alive</span> Lessons.</div>
+    <div class="graveyard-subtitle">Every failed startup is a lesson for founders. Study the patterns, avoid the mistakes, spot the gaps they left behind.</div>
+    <div class="graveyard-stats">
+      <div class="g-stat"><div class="g-stat-val">1,200+</div><div class="g-stat-label">Dead Startups</div></div>
+      <div class="g-stat"><div class="g-stat-val">$180B+</div><div class="g-stat-label">Capital Burned</div></div>
+      <div class="g-stat"><div class="g-stat-val">7</div><div class="g-stat-label">Failure Patterns</div></div>
+      <div class="g-stat"><div class="g-stat-val">22</div><div class="g-stat-label">Industries</div></div>
+    </div>
+  </div>
+  <div class="graveyard-controls">
+    <span class="g-filter-label">Filter:</span>
+    <button class="g-filter-btn active" onclick="filterGraveyard('all',this)">All</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('Fintech',this)">Fintech</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('SaaS',this)">SaaS</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('E-commerce',this)">E-Commerce</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('Social',this)">Social</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('Health',this)">Health</button>
+    <button class="g-filter-btn" onclick="filterGraveyard('Marketplace',this)">Marketplace</button>
+    <input class="g-search" id="graveyardSearch" type="text" placeholder="Search graveyard..." oninput="searchGraveyard(this.value)">
+  </div>
+  <div class="graveyard-grid" id="graveyardGrid"></div>
+  <div class="graveyard-footer-bar">
+    <div class="g-source">Data sourced from <a href="https://www.loot-drop.io/" target="_blank">loot-drop.io</a> & <a href="https://startups.rip/" target="_blank">startups.rip</a></div>
+    <div class="g-source">Updated regularly · For educational purposes</div>
+  </div>
+</div>
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-content">
@@ -152,6 +244,93 @@
   document.getElementById('heroInput').addEventListener('keydown',e=>{if(e.key==='Enter')goAnalyze()});
   const observer=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){e.target.style.animation=`fadeUp 0.5s ${i*.07}s ease both`;observer.unobserve(e.target)}})},{threshold:.1});
   document.querySelectorAll('.feature,.step').forEach(el=>observer.observe(el));
+
+  // ── STARTUP GRAVEYARD DATA ──────────────────────────────────────────────
+  const GRAVEYARD = [
+    {name:"Quibi",industry:"Media",tags:["Streaming","Mobile","Content"],status:"Shutdown",burned:"$1.75B",year:2020,desc:"Mobile-first short-form video platform that raised $1.75B and shut down after just 6 months. Launched during COVID when nobody was commuting.",lesson:"Timing is everything. A product built for a behavior (commuting) that vanished overnight has no fallback.",pattern:"No Market Need"},
+    {name:"Webvan",industry:"E-commerce",tags:["Grocery","Delivery","Logistics"],status:"Bankrupt",burned:"$800M",year:2001,desc:"Online grocery delivery pioneer that expanded too fast before the infrastructure or consumer habits were ready. Burned through $800M.",lesson:"Scaling before product-market fit is a death sentence. Webvan built warehouses before validating demand.",pattern:"Premature Scaling"},
+    {name:"Theranos",industry:"Health",tags:["Biotech","Diagnostics","Fraud"],status:"Fraud",burned:"$700M",year:2018,desc:"Blood-testing startup that claimed to run 200+ tests from a single drop. The technology never worked. Founder Elizabeth Holmes convicted of fraud.",lesson:"In regulated industries, fake it till you make it is a federal crime.",pattern:"Fraud / Deception"},
+    {name:"WeWork",industry:"SaaS",tags:["Real Estate","B2B","Coworking"],status:"Bankrupt",burned:"$11B",year:2023,desc:"Coworking giant that peaked at a $47B valuation before imploding. Long-term leases + short-term revenue = catastrophic mismatch.",lesson:"A real estate company with a tech multiple is still a real estate company.",pattern:"Flawed Business Model"},
+    {name:"Vine",industry:"Social",tags:["Video","Social Media","Mobile"],status:"Shutdown",burned:"$30M",year:2016,desc:"Twitter's 6-second video app that invented the short-form video format — then got killed by its parent company while TikTok took the throne.",lesson:"Killing your best product to protect your core is how you lose both.",pattern:"Poor Strategy"},
+    {name:"Juicero",industry:"E-commerce",tags:["Hardware","Food","DTC"],status:"Shutdown",burned:"$120M",year:2017,desc:"$400 Wi-Fi connected juicer that squeezed proprietary juice packs. Journalists discovered you could squeeze the packs by hand just as well.",lesson:"If your product's value prop can be replicated by human hands, you don't have a product.",pattern:"No Market Need"},
+    {name:"Rdio",industry:"SaaS",tags:["Music","Streaming","B2C"],status:"Bankrupt",burned:"$125M",year:2015,desc:"Music streaming pioneer with a better UX than Spotify. Lost the market to Spotify's superior distribution and freemium model.",lesson:"Better product doesn't win. Better distribution does.",pattern:"Poor Strategy"},
+    {name:"Fab.com",industry:"E-commerce",tags:["Design","Marketplace","DTC"],status:"Shutdown",burned:"$336M",year:2015,desc:"Flash-sale design marketplace that grew to $1B valuation then pivoted repeatedly, burning cash until nothing was left.",lesson:"Pivoting without conviction is just expensive wandering.",pattern:"Premature Scaling"},
+    {name:"Friendster",industry:"Social",tags:["Social Network","Web2","Pioneer"],status:"Shutdown",burned:"$50M",year:2011,desc:"The original social network that had 3M users before Facebook existed. Couldn't scale its servers. Users left for MySpace, then Facebook.",lesson:"In social networks, performance IS the product. Slow = dead.",pattern:"Technical Failure"},
+    {name:"Posterous",industry:"SaaS",tags:["Blogging","Email","Publishing"],status:"Acquired→Shutdown",burned:"N/A",year:2013,desc:"Dead-simple blogging by email. Acquired by Twitter in 2012, shut down in 2013. The acqui-hire that killed a product millions loved.",lesson:"Getting acquired by a distracted giant is often a slow death sentence.",pattern:"Poor Strategy"},
+    {name:"LendUp",industry:"Fintech",tags:["Lending","Consumer","Fintech"],status:"Shutdown",burned:"$300M+",year:2021,desc:"Fintech lender targeting underbanked consumers with a 'ladder' to better credit. Regulatory fines and compliance failures ended it.",lesson:"Fintech built on regulatory arbitrage is a ticking clock.",pattern:"Regulatory Failure"},
+    {name:"Munchery",industry:"Marketplace",tags:["Food","Delivery","B2C"],status:"Shutdown",burned:"$125M",year:2019,desc:"Chef-prepared meal delivery that couldn't crack unit economics. Delivery costs + food waste + low margins = inevitable collapse.",lesson:"Food delivery math is brutal. If you can't solve unit economics at scale, don't scale.",pattern:"Flawed Business Model"},
+    {name:"Homejoy",industry:"Marketplace",tags:["Home Services","Gig Economy","B2C"],status:"Shutdown",burned:"$38M",year:2015,desc:"On-demand home cleaning marketplace shut down after workers filed lawsuits claiming employee misclassification.",lesson:"Gig economy models live and die by worker classification law.",pattern:"Regulatory Failure"},
+    {name:"Yik Yak",industry:"Social",tags:["Anonymous","Social","Mobile"],status:"Shutdown",burned:"$73M",year:2017,desc:"Anonymous location-based social app beloved by college students. Cyberbullying and harassment drove it to extinction.",lesson:"Anonymous + location + no moderation = a product that destroys itself.",pattern:"No Market Need"},
+    {name:"Tutorspree",industry:"Marketplace",tags:["Education","Marketplace","YC"],status:"Shutdown",burned:"N/A",year:2013,desc:"YC-backed online tutoring marketplace that shut down after Google changed its algorithm, wiping out 80% of traffic overnight.",lesson:"Building your entire growth on one channel (SEO) is building on sand.",pattern:"Poor Strategy"},
+    {name:"Jawbone",industry:"Health",tags:["Wearables","Hardware","Health"],status:"Bankrupt",burned:"$900M",year:2017,desc:"Fitness tracker pioneer that raised nearly $1B but couldn't compete with Fitbit and Apple Watch. Hardware is brutally hard.",lesson:"In hardware, being first doesn't matter if you can't iterate fast enough.",pattern:"Technical Failure"},
+    {name:"Quirky",industry:"Marketplace",tags:["Crowdsourcing","Hardware","Invention"],status:"Bankrupt",burned:"$185M",year:2015,desc:"Crowdsourced invention platform that let the public vote on product ideas. Manufacturing complexity and thin margins killed it.",lesson:"Crowdsourcing product decisions doesn't solve manufacturing economics.",pattern:"Flawed Business Model"},
+    {name:"Beepi",industry:"Marketplace",tags:["Automotive","Marketplace","P2P"],status:"Shutdown",burned:"$150M",year:2017,desc:"Peer-to-peer used car marketplace with white-glove delivery. Operational complexity and burn rate outpaced growth.",lesson:"Operational complexity is a moat — until it becomes a millstone.",pattern:"Premature Scaling"},
+    {name:"Pebble",industry:"SaaS",tags:["Wearables","Hardware","Kickstarter"],status:"Acquired→Shutdown",burned:"N/A",year:2016,desc:"Kickstarter darling that invented the smartwatch category. Apple Watch entered and Pebble couldn't compete on ecosystem.",lesson:"Inventing a category doesn't protect you when a platform player enters.",pattern:"Poor Strategy"},
+    {name:"Rdio",industry:"SaaS",tags:["Music","Streaming","B2C"],status:"Bankrupt",burned:"$125M",year:2015,desc:"Music streaming pioneer with a better UX than Spotify. Lost the market to Spotify's superior distribution and freemium model.",lesson:"Better product doesn't win. Better distribution does.",pattern:"Poor Strategy"},
+    {name:"Codecademy",industry:"Marketplace",tags:["Education","SaaS","YC"],status:"Acquired",burned:"N/A",year:2022,desc:"YC-backed coding education platform acquired by Skillsoft. Struggled to convert free learners to paid subscribers at scale.",lesson:"Free-to-paid conversion in education is one of the hardest problems in consumer SaaS.",pattern:"Flawed Business Model"},
+    {name:"Zirtual",industry:"SaaS",tags:["Productivity","B2B","Remote Work"],status:"Shutdown",burned:"$5M",year:2015,desc:"Virtual assistant marketplace that shut down overnight, leaving 400 employees without jobs. Payroll miscalculation caused instant collapse.",lesson:"Cash flow mismanagement can kill a profitable business faster than any competitor.",pattern:"Operational Failure"},
+    {name:"Daqri",industry:"SaaS",tags:["AR","Hardware","Enterprise"],status:"Shutdown",burned:"$275M",year:2019,desc:"Enterprise augmented reality headset maker that burned $275M chasing a market that wasn't ready for $15K AR helmets.",lesson:"Enterprise hardware adoption cycles are measured in decades, not quarters.",pattern:"No Market Need"},
+    {name:"Shyp",industry:"Marketplace",tags:["Logistics","On-Demand","B2C"],status:"Shutdown",burned:"$62M",year:2018,desc:"On-demand package pickup and shipping service. Unit economics never worked — they were losing money on every shipment.",lesson:"Convenience businesses only work when the unit economics work. Subsidizing convenience is not a business.",pattern:"Flawed Business Model"},
+  ];
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  function renderGraveyard() {
+    const grid = document.getElementById('graveyardGrid');
+    let data = GRAVEYARD;
+    if (currentFilter !== 'all') {
+      data = data.filter(s => s.industry.toLowerCase().includes(currentFilter.toLowerCase()) || s.tags.some(t => t.toLowerCase().includes(currentFilter.toLowerCase())));
+    }
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      data = data.filter(s => s.name.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || s.industry.toLowerCase().includes(q) || s.tags.some(t => t.toLowerCase().includes(q)));
+    }
+    if (!data.length) {
+      grid.innerHTML = '<div class="no-results">💀 No corpses found matching your search</div>';
+      return;
+    }
+    grid.innerHTML = data.map((s, i) => `
+      <div class="grave-card" style="animation-delay:${i * 0.04}s">
+        <div class="grave-skull">💀</div>
+        <div class="grave-name">${s.name}</div>
+        <div class="grave-industry">${s.industry} · ${s.year}</div>
+        <div class="grave-meta">
+          <span class="grave-tag grave-tag-red">${s.status}</span>
+          ${s.burned !== 'N/A' ? `<span class="grave-tag grave-tag-orange">Burned: ${s.burned}</span>` : ''}
+          ${s.tags.slice(0,2).map(t => `<span class="grave-tag grave-tag-gray">${t}</span>`).join('')}
+        </div>
+        <div class="grave-desc">${s.desc}</div>
+        <div class="grave-lesson">
+          <div class="grave-lesson-label">// Key Lesson</div>
+          ${s.lesson}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleGraveyard(on) {
+    const panel = document.getElementById('graveyardPanel');
+    if (on) {
+      panel.classList.add('open');
+      renderGraveyard();
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    } else {
+      panel.classList.remove('open');
+    }
+  }
+
+  function filterGraveyard(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.g-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGraveyard();
+  }
+
+  function searchGraveyard(val) {
+    currentSearch = val;
+    renderGraveyard();
+  }
 </script>
 </body>
 </html>
